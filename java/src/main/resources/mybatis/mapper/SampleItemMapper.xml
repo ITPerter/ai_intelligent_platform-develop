@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.SampleItemDao">
+
+    <resultMap id="sampleItem" type="com.q.ai.mvc.dao.po.SampleItem">
+        <result property="id" column="id"/>
+        <result property="sampleId" column="sampleId"/>
+        <result property="slotNumber" column="slotNumber"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+        <result property="value" column="value"/>
+
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+
+
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into sampleItem(
+        sampleId,
+        slotNumber,
+        start,
+        end,
+        value,
+        creator,
+        createTime
+        ) values(
+        #{sampleId},
+        #{slotNumber},
+        #{start},
+        #{end},
+        #{value},
+        #{creator},
+        #{createTime}
+        )
+
+    </insert>
+
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.Sample">
+        update sampleItem
+        <set>
+            <if test="slotNumber!=null">slotNumber=#{slotNumber},</if>
+            <if test="start!=null">start=#{start},</if>
+            <if test="end!=null">end=#{end},</if>
+            <if test="value!=null">value=#{value},</if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="delByIdList" parameterType="list" >
+        delete from sampleItem where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delBySampleId" parameterType="int">
+        delete from sampleItem where sampleId = #{sampleId}
+    </delete>
+
+    <select id="getListByIdList" resultMap="sampleItem">
+        select * from sampleItem where sampleId in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+
+</mapper>

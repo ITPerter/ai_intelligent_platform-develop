@@ -1,0 +1,28 @@
+@prefixCls:web-nlpwordslot;
+
+.@{prefixCls}-wrapper{
+    margin-left:8px;
+    border-radius: 2px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    line-height: 12px;
+    padding:5px 8px;
+    cursor: pointer;
+    &.@{prefixCls}-selected,
+    &.@{prefixCls}-selecting{
+        color: #5E80EB;
+        letter-spacing: 0;
+        border: 1px solid #5E80EB;
+    }
+    &.@{prefixCls}-canSelect,
+    &.@{prefixCls}-noSelect{
+        border: 1px solid #E5E5E5;
+        color: #bbb;
+    }
+    &.@{prefixCls}-canSelect{
+        cursor: pointer;
+    }
+    &.@{prefixCls}-noSelect{
+        cursor:not-allowed;
+    }
+}

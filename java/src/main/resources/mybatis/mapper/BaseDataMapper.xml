@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.BaseDataDao">
+
+
+    <resultMap id="baseData" type="com.q.ai.mvc.dao.po.BaseData">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="number" column="number"/>
+        <result property="des" column="des"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+
+    <select id="getById" resultType="com.q.ai.mvc.dao.po.BaseData">
+        select * from baseData where id=#{id}
+    </select>
+
+
+    <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.BaseData">
+        select * from baseData where number=#{number}
+    </select>
+
+
+    <select id="getListCount" resultType="int">
+        select count(id) from baseData;
+    </select>
+
+    <select id="getList" resultMap="baseData">
+        select * from baseData order by createTime desc limit #{offset},#{limit}
+    </select>
+
+
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into baseData(
+        name,
+        number,
+        des,
+        creator,
+        createTime
+        ) values(
+        #{name},
+        #{number},
+        #{des},
+        #{creator},
+        #{createTime}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.BaseData">
+        update baseData
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="des!=null">des=#{des},</if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="delByNumberList" parameterType="list">
+        delete from baseData where number in
+        <foreach collection="list" item="number" open="(" close=")" separator=",">
+            #{number}
+        </foreach>
+    </delete>
+
+</mapper>

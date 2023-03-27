@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.RobotMapper">
+
+    <resultMap id="robot" type="com.q.ai.mvc.dao.po.Robot">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="number" column="number"/>
+        <result property="trainState" column="trainState"/>
+        <result property="exceptionRs" column="exceptionRs"/>
+        <result property="noIntentRs" column="noIntentRs"/>
+        <result property="des" column="des"/>
+        <result property="creator" column="creator"/>
+        <result property="updater" column="updater"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+
+    <select id="getById" resultType="com.q.ai.mvc.dao.po.Robot">
+        select * from robot where id=#{id}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(id) from robot;
+    </select>
+
+    <select id="getList" resultMap="robot">
+        select * from robot order by updateTime desc limit #{offset},#{limit}
+    </select>
+
+
+
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into robot(
+            name,
+            number,
+            trainState,
+            exceptionRs,
+            noIntentRs,
+            des,
+            creator,
+            updater,
+            createTime,
+            updateTime
+        ) values(
+            #{name},
+            #{number},
+            #{trainState},
+            #{exceptionRs},
+            #{noIntentRs},
+            #{des},
+            #{creator},
+            #{updater},
+            #{createTime},
+            #{updateTime}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.Robot">
+        update robot
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="trainState!=null">trainState=#{trainState},</if>
+            <if test="exceptionRs!=null">exceptionRs=#{exceptionRs},</if>
+            <if test="noIntentRs!=null">noIntentRs=#{noIntentRs},</if>
+            <if test="des!=null">des=#{des},</if>
+            <if test="updater!=null">updater=#{updater},</if>
+            <if test="updateTime!=null">updateTime=#{updateTime},</if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="delByIdList" parameterType="list" >
+        delete from robot where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

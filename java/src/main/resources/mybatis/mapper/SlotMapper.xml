@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.SlotDao">
+
+    <resultMap id="slot" type="com.q.ai.mvc.dao.po.Slot">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="number" column="number"/>
+        <result property="des" column="des"/>
+        <result property="type" column="type"/>
+        <result property="baseDataNumber" column="baseDataNumber"/>
+        <result property="must" column="must"/>
+        <result property="defaultValue" column="defaultValue"/>
+        <result property="clarification" column="clarification"/>
+        <result property="creator" column="creator"/>
+        <result property="updater" column="updater"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+
+    <select id="getById" resultType="com.q.ai.mvc.dao.po.Slot">
+        select * from slot where id=#{id}
+    </select>
+
+
+    <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.Slot">
+        select * from slot where number=#{number}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(id) from slot;
+    </select>
+
+    <select id="getList" resultMap="slot">
+        select * from slot limit #{offset},#{limit}
+    </select>
+
+
+    <select id="getListByIntentId" resultMap="slot">
+        SELECT s.* FROM intent2Slot AS i
+        Right JOIN
+        slot AS s
+        ON i.`slotId` = s.`id`
+        WHERE i.intentId = #{id}
+        ORDER BY i.seq ASC,i.`createTime` DESC
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getListByIntentIdCount" resultType="int">
+        SELECT count(i.id) FROM intent2Slot AS i
+        Right JOIN
+        slot AS s
+        ON i.`intentId` = s.`id`
+        WHERE i.intentId = #{id}
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into slot(
+        name,
+        number,
+        des,
+        type,
+        baseDataNumber,
+        must,
+        defaultValue,
+        clarification,
+        creator,
+        updater,
+        createTime,
+        updateTime
+        ) values(
+        #{name},
+        #{number},
+        #{des},
+        #{type},
+        #{baseDataNumber},
+        #{must},
+        #{defaultValue},
+        #{clarification},
+        #{creator},
+        #{updater},
+        #{createTime},
+        #{updateTime}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.Slot">
+        update slot
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="des!=null">des=#{des},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="baseDataNumber!=null">baseDataNumber=#{baseDataNumber},</if>
+            <if test="must!=null">must=#{must},</if>
+            <if test="defaultValue!=null">defaultValue=#{defaultValue},</if>
+            <if test="clarification!=null">clarification=#{clarification},</if>
+            <if test="updater!=null">updater=#{updater},</if>
+            <if test="updateTime!=null"> updateTime=#{updateTime}, </if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="delByIdList" parameterType="list" >
+        delete from slot where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

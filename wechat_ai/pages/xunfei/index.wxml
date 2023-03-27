@@ -1,0 +1,9 @@
+<view class="container">
+    <view class="showContent">
+        <view>{{searchKey}}</view>
+    </view>
+
+    <view class="content">
+        <button class="btn" bindrecordstart="start_say" bindrecordend="end_say">点击按钮说话</button>
+    </view>
+</view>

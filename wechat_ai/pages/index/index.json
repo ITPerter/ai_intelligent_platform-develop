@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "bottom-button": "/components/bottom-button/index",
+    "result-bubble": "/components/result-bubble/index",
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+
+}

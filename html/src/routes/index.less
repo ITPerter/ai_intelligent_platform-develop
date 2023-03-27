@@ -1,0 +1,46 @@
+.router-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  & .header {
+    height: 50px;
+    flex-shrink: 0;
+    & img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  & .bodyContent {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    & .slideNav {
+      width: 50px;
+      flex-shrink: 0;
+    }
+    & .content {
+      flex-grow: 1;
+      background-color: rgb(226, 231, 239);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      &-page {
+        flex-grow: 1;
+        overflow: auto;
+        padding: 10px;
+      }
+
+      // & .detailContent {
+      //   flex-grow: 1;
+      //   overflow: auto;
+      //   height: 100%;
+      // }
+    }
+  }
+}

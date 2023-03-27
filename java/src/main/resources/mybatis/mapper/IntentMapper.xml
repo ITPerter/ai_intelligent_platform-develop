@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.IntentDao">
+
+    <resultMap id="intent" type="com.q.ai.mvc.dao.po.Intent">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="number" column="number"/>
+        <result property="des" column="des"/>
+        <result property="creator" column="creator"/>
+        <result property="updater" column="updater"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+
+    <select id="getById" resultType="com.q.ai.mvc.dao.po.Intent">
+        select * from intent where id=#{id}
+    </select>
+
+    <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.Intent">
+        select * from intent where number=#{number}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(id) from intent;
+    </select>
+
+    <select id="getList" resultMap="intent">
+        select * from intent order by updateTime desc limit #{offset},#{limit}
+    </select>
+    <select id="getListByRobotId" resultMap="intent">
+        SELECT i.* FROM robot2Intent AS r
+        Right JOIN
+        intent AS i
+        ON r.`intentId` = i.`id`
+        WHERE r.robotId = #{id}
+        ORDER BY r.`createTime` DESC
+        limit #{offset},#{limit}
+    </select>
+    <select id="getListByRobotIdCount" resultType="int">
+        SELECT count(r.id) FROM robot2Intent AS r
+        Right JOIN
+        intent AS i
+        ON r.`intentId` = i.`id`
+        WHERE r.robotId = #{id}
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into intent(
+            name,
+            number,
+            des,
+            creator,
+            updater,
+            createTime,
+            updateTime
+        ) values(
+            #{name},
+            #{number},
+            #{des},
+            #{creator},
+            #{updater},
+            #{createTime},
+            #{updateTime}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.Intent">
+        update intent
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="des!=null">des=#{des},</if>
+            <if test="updater!=null">updater=#{updater},</if>
+            <if test="updateTime!=null">updateTime=#{updateTime},</if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="delByIdList" parameterType="list" >
+        delete from intent where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delByRobotId" parameterType="int" >
+        delete from intent where robotId = #{id}
+    </delete>
+
+</mapper>

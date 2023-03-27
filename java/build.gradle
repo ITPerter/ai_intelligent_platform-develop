@@ -1,0 +1,219 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+buildscript {
+    ext {
+
+        springBootVersion = '2.1.3.RELEASE'
+        //maven阿里仓库地址
+        aliMavenUrl = 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    repositories {
+        mavenLocal()                //maven本地仓库
+        maven { url = aliMavenUrl }
+        jcenter()                    //maven 一个第二大的仓库
+        mavenCentral()                //maven 中央仓库，第一大仓库
+    }
+
+    dependencies {
+        //gradle 插件，允许省略springboot version
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+
+
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHH"));
+sourceCompatibility = 1.8
+group = 'com.ai'
+version = time;
+
+bootJar {
+
+    System.out.println(project.getBuildDir())
+    setBaseName("ai-v")
+    String buildLibsPath = project.getBuildDir().toString() + "\\libs"
+
+    File buildLibsFile = new File(buildLibsPath)
+    File[] files = buildLibsFile.listFiles();
+    for (File file : files) {
+        if (file.getName().startsWith("ai-v")) {
+            String newPath = buildLibsPath + "\\old_" + file.getName()
+            file.renameTo(newPath);
+            System.out.println(newPath + " is moved!")
+        }
+    }
+}
+
+def isWindows() {
+    return org.gradle.internal.os.OperatingSystem.current().isWindows()
+}
+
+//resources-${cpEnv}/Iprotocol_bz.txt","src/main/java/com/caiqr/caipiao/wsdl/hecai/
+task toline() {
+
+    doLast {
+    exec{
+        String buildLibsPath = project.getBuildDir().toString() + "\\libs"
+        File buildLibsFile = new File(buildLibsPath)
+        if (buildLibsFile.exists()) {
+            File[] files = buildLibsFile.listFiles();
+            for (File file : files) {
+                if (file.getName().startsWith("ai-v")) {
+                    String jarFilePath = buildLibsPath + "\\old_" + file.getName()
+                    def sh
+                    if(isWindows()){
+                        sh = ["C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                              "scp", "-P", "228", jarFilePath, "tong@tocute.cn:/opt/www/ai"]
+                    }else{
+                        sh = ["scp", "-P", "228", jarFilePath, "tong@tocute.cn:/opt/www/ai"]
+                    }
+                    commandLine sh
+                }
+            }
+
+
+        } else {
+            System.out.println("build dir is not exists.")
+        }
+    }}
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+project.ext {
+    logbackVersion = '1.1.7'
+    fastJsonVersion = '1.2.56'
+    excelPoiVersion = '4.0.1'
+    apacheHttpVersion = '4.5.7'
+    csvVersion = '1.6'
+    mybatisVersion = '2.1.3'
+    apacheLang3 = '3.9'
+    lombokVersion = '1.18.12'
+    guavaVersion = '23.6-jre'
+    esVersion = '7.8.1'
+    //swagger的spring实现
+    springFoxVersion= '3.0.0'
+    //冗余两个swagger-ui(knife4j是swaggerBootStrap混合了java后端没什么用)
+    swaggerBootStrapUIVersion = '1.9.6'
+
+}
+
+//https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/htmlsingle/#dependency-versions-properties
+ext['elasticsearch.version'] =  esVersion
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.18'
+
+    //implementation不可以依赖传递，但是compile可以依赖传递
+    //implementation 检查后更安全  有助于防止多模块项目的传递依赖混乱
+
+    //完整模式
+    /**
+     * 完整模式：
+     * group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+     * 简写模式：
+     * 'ch.qos.logback:logback-core:' + logbackVersion,
+     */
+
+    /**
+     * logback的三个模块
+     * logback-core：其它两个模块的基础模块
+     * logback-classic：它是log4j的一个改良版本，同时它完整实现了slf4j API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging
+     * logback-access：访问模块与Servlet容器集成提供通过Http来访问日志的功能
+     */
+    //基础
+
+
+
+    compile 'org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE'
+    compile 'org.springframework.plugin:spring-plugin-metadata:2.0.0.RELEASE'
+
+    implementation([
+            'org.springframework.boot:spring-boot-starter-web',
+            // 启用配置文件注解 @ConfigurationProperties("") 等
+            'org.springframework.boot:spring-boot-configuration-processor',
+            // springboot监控 默认关闭，需要配置项中打开
+            //'org.springframework.boot:spring-boot-starter-actuator',
+            //安全相关 spring-boot-starter-security 这里用来保证actuator endpoint 的安全访问
+            //'org.springframework.boot:spring-boot-starter-security',
+            'ch.qos.logback:logback-core:' + logbackVersion,
+            'ch.qos.logback:logback-classic:' + logbackVersion,
+
+
+    ])
+
+
+    //DB
+    implementation([
+            //mongo
+            //'org.springframework.boot:spring-boot-starter-data-mongodb',
+            //redis
+            //'org.springframework.boot:spring-boot-starter-data-redis',
+            //session-redis
+            //'org.springframework.session:spring-session-data-redis',
+            //Use MySQL Connector-J  mysql的java驱动  for spring-jpa
+            'mysql:mysql-connector-java',
+            //mybatis-spring  ,mybatis与Hibernate选择一个即可，此项目为了演示引入两个包
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter:' + mybatisVersion,
+            'org.elasticsearch.client:elasticsearch-rest-high-level-client:' + esVersion,
+    ])
+
+
+
+
+    // aop面向切面编程，用于使用spring aop & AspectJ 实现切面编程
+    implementation('org.springframework.boot:spring-boot-starter-aop')
+    //工具类
+    implementation([
+            //Springfox的前身是swagger-springmvc，是一个开源的API doc框架，可以将我们的Controller的方法以文档的形式展现
+            'io.springfox:springfox-boot-starter:' + springFoxVersion,
+            //swagger-bootstrap-ui仅仅只是一个ui包，里面不包括任何Java代码，基于swagger
+            'com.github.xiaoymin:swagger-bootstrap-ui:' + swaggerBootStrapUIVersion,
+            // https://mvnrepository.com/artifact/com.alibaba/fastjson
+            'com.alibaba:fastjson:' + fastJsonVersion,
+            //apache http
+            // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+            'org.apache.httpcomponents:httpclient:' + apacheHttpVersion,
+            'com.google.guava:guava:'+guavaVersion,
+
+
+            files('lib/Time-NLP-1.0.0.jar')
+
+
+    ])
+
+    implementation([
+            //热部署，调试代码的时候不用重启，只需要build project（rebuild project）
+            // 会导致首次启动时main函数SpringApplication.run(）前的代码被执行两次
+            'org.springframework.boot:spring-boot-devtools',
+    ])
+
+
+    compileOnly([
+            //for getter setter tostring 注解,还需要下载idea插件，开启idea注解编译执行：
+            //file-->setting-->build,excecution,deployment-->compiler-->annotation processors勾选上 enable annotation processing。
+            //   'org.projectlombok:lombok:'+lombokVersion,
+    ])
+
+    testImplementation([
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.junit.jupiter:junit-jupiter:5.4.2',
+    ])
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+
+//引用dependencies.gradle
+//apply from: 'proguard.gradle'

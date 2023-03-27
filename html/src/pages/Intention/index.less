@@ -1,0 +1,34 @@
+
+@prefixCls:vi-intention;
+.@{prefixCls}-wrapper{
+    height:100%;
+    padding:10px 20px;
+    background:#fff;
+    overflow:auto;
+    .@{prefixCls}-btn-row{
+        width:100%;
+        margin:10px 0px;
+        display: inline-flex;
+        justify-content: flex-end;
+    }
+
+}
+
+.@{prefixCls}-modal{
+    & .row{
+        margin-top:10px;
+        width:100%;
+        display: inline-flex;
+        cursor: pointer;
+        
+        & label{
+            width:100px;
+            display: block;
+            text-align: right;
+            margin-right: 10px;
+        }
+        & input{
+            width:240px;
+        }
+    }
+}

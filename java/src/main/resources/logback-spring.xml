@@ -1,0 +1,29 @@
+<configuration  packagingData="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{trackId:-0}] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>logs/server.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{trackId:-0}] %-5level %logger{20} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+    <!-- child logger要放在root logger后面-->
+
+
+    <!--关闭某个包的日志-->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation" level="OFF"/>
+
+    <!--打开sql日志-->
+    <logger name="com.q.ai.mvc.dao" level="DEBUG"/>
+    <logger name="com.q.ai.mvc.dao" level="OFF"/>
+</configuration>

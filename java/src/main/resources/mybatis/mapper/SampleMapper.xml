@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q.ai.mvc.dao.SampleDao">
+
+    <resultMap id="sample" type="com.q.ai.mvc.dao.po.Sample">
+        <result property="id" column="id"/>
+        <result property="intentId" column="intentId"/>
+        <result property="content" column="content"/>
+        <result property="intentTrain" column="intentTrain"/>
+
+        <result property="creator" column="creator"/>
+        <result property="updater" column="updater"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+
+
+
+    <select id="getListByIntentIdCount" resultType="int">
+        select count(id) from sample where intentId = #{id}
+    </select>
+
+    <select id="getListByIntentId" resultMap="sample">
+        select * from sample where intentId = #{id} order by createTime desc limit #{offset},#{limit}
+    </select>
+
+    <insert id="inserts" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into sample(
+        intentId,
+        content,
+        intentTrain,
+            creator,
+            updater,
+            createTime,
+            updateTime
+        ) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.intentId},#{item.content},#{item.intentTrain},
+                #{item.creator},#{item.updater},#{item.createTime}, #{item.updateTime})
+        </foreach>
+    </insert>
+
+
+    <update id="update" parameterType="com.q.ai.mvc.dao.po.Sample">
+        update sample
+        <set>
+            <if test="content!=null">content=#{content},</if>
+            <if test="intentTrain!=null">intentTrain=#{intentTrain},</if>
+            <if test="updater!=null">updater=#{updater},</if>
+            <if test="updateTime!=null">updateTime=#{updateTime},</if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="delByIdList" parameterType="list" >
+        delete from sample where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

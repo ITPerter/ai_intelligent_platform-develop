@@ -1,0 +1,21 @@
+@prefixCls:vi-header;
+
+.@{prefixCls}-wrapper{
+    height: 50px;
+    display:inline-flex;
+    width:100%;
+    & .@{prefixCls}-left{
+        flex-grow:1;
+    }
+    & .@{prefixCls}-right{
+        width:120px;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        & img{
+            margin-left: 16px;
+            width:24px;
+            height: 24px;
+        }
+    }
+}
