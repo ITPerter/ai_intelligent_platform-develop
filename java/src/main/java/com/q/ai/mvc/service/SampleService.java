@@ -11,6 +11,7 @@ import com.q.ai.mvc.dao.SampleItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -19,15 +20,20 @@ import java.util.*;
 public class SampleService {
 
 
-    @Autowired
+    @Resource
     SampleDao sampleDao;
 
-    @Autowired
+    @Resource
     SampleItemDao sampleItemDao;
-    @Autowired
+    @Resource
     RequestContext requestContext;
 
-
+    /**
+     * 通过意图id获取意图（文本）分页数据
+     * @param intentId
+     * @param page
+     * @return
+     */
     public List<Sample> getListByIntentId(int intentId, Page page) {
         page.setTotal(sampleDao.getListByIntentIdCount(intentId));
         return sampleDao.getListByIntentId(intentId,page.getOffset(), page.getLimit());
@@ -42,6 +48,7 @@ public class SampleService {
     public List<SampleVo> getVoListByIntentId(int intentId, Page page) {
         page.setTotal(sampleDao.getListByIntentIdCount(intentId));
         List<Sample> sampleList = sampleDao.getListByIntentId(intentId, page.getOffset(), page.getLimit());
+
         Map<Integer, List<SampleItem>> sampleId2SampleSlotMap = getSampleItemListBySampleList(sampleList);
 
         List<SampleVo> sampleVoList = new ArrayList<>();
@@ -116,6 +123,11 @@ public class SampleService {
         }
     }
 
+    /**
+     * 以答案id为键，以数据为值进行包装
+     * @param sampleList
+     * @return
+     */
     public Map<Integer, List<SampleItem>> getSampleItemListBySampleList(List<Sample> sampleList) {
         List<Integer> sampleIdList = new ArrayList<>();
         for (Sample sample : sampleList) {
@@ -129,15 +141,14 @@ public class SampleService {
         List<SampleItem> sampleItemList = sampleItemDao.getListByIdList(sampleIdList);
 
         for (SampleItem sampleItem : sampleItemList) {
-            int sampleId = sampleItem.getSampleId();
-            List<SampleItem> sampleItemListTem = sampleId2SampleItemMap.getOrDefault(sampleId, new ArrayList<>());
+            int sampleItemId = sampleItem.getSampleId();
+            List<SampleItem> sampleItemListTem = sampleId2SampleItemMap.getOrDefault(sampleItemId, new ArrayList<>());
             sampleItemListTem.add(sampleItem);
-            sampleId2SampleItemMap.put(sampleId, sampleItemListTem);
+            sampleId2SampleItemMap.put(sampleItemId, sampleItemListTem);
         }
 
         return sampleId2SampleItemMap;
 
     }
-
 
 }

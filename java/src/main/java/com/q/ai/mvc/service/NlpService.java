@@ -15,10 +15,15 @@ import org.springframework.util.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 算法处理业务
+ */
 @Service
 public class NlpService {
 
+    /**
+     * 算法处理接口
+     */
     @Value("${nlp_host}")
     private String nlp_url;
 
@@ -67,7 +72,11 @@ public class NlpService {
 
     }
 
-
+    /**
+     *
+     * @param request
+     * @return
+     */
     @LogMethod(true)
     private JSONObject postNlp(Map<String, Object> request) {
         if (StringUtils.isEmpty(nlp_url)) {

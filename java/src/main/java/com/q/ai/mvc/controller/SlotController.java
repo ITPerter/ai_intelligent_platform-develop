@@ -18,23 +18,31 @@ import com.q.ai.mvc.service.BaseDataValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 词槽相关接口
+ */
 @Auth(AUTH_TYPE.SESSION)
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/slot")
 public class SlotController {
 
-    @Autowired
+    @Resource
     private SlotService slotService;
-    @Autowired
+    @Resource
     private IntentService intentService;
-    @Autowired
+    @Resource
     private BaseDataValueService baseDataValueService;
 
-
+    /**
+     * 通过id获取词槽数据
+     * @param id
+     * @return
+     */
     @GetMapping("/getById")
     public Rs getById(@RequestParam int id) {
         Slot slot = slotService.getById(id);
@@ -44,7 +52,12 @@ public class SlotController {
         return Rs.buildErr("词槽不存在");
     }
 
-
+    /**
+     * 获取分页词槽数据
+     * @param number
+     * @param size
+     * @return
+     */
     @GetMapping("/getList")
     public Rs getList(@RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
@@ -52,6 +65,13 @@ public class SlotController {
         return Rs.buildList(slots, page);
     }
 
+    /**
+     * 通过意图id获取词槽分页数据
+     * @param intentId
+     * @param number
+     * @param size
+     * @return
+     */
     @GetMapping("/getListByIntentId")
     public Rs getListByIntentId(@RequestParam int intentId, @RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
@@ -59,6 +79,10 @@ public class SlotController {
         return Rs.buildList(slots, page);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/getSlotType")
     public Rs getSlotType() {
         return Rs.buildData(SLOT_TYPE.values());
@@ -83,7 +107,6 @@ public class SlotController {
 
     /**
      * 交换顺序值（特殊情况，到最开始，到最后）
-     *
      * @param param
      * @return
      */

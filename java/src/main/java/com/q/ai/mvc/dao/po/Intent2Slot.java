@@ -10,6 +10,7 @@ public class Intent2Slot {
     private int id;
     private int intentId;
     private int slotId;
+    // seq 排序
     private int seq;
     private int creator;
     private LocalDateTime createTime;

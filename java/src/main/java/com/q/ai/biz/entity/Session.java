@@ -15,7 +15,6 @@ public class Session {
     private ChatIntent currentChatIntent;
     private ChatIntent beforeChatIntent;
 
-
     private LocalDateTime createTime;
 
     public Session() {

@@ -37,6 +37,7 @@ bootJar {
 
     System.out.println(project.getBuildDir())
     setBaseName("ai-v")
+
     String buildLibsPath = project.getBuildDir().toString() + "\\libs"
 
     File buildLibsFile = new File(buildLibsPath)
@@ -217,3 +218,4 @@ dependencies {
 
 //引用dependencies.gradle
 //apply from: 'proguard.gradle'
+

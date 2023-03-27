@@ -61,6 +61,7 @@ public class UserController {
 
         Session session = requestContext.getSession();
         session.setUserId(userId == null || userId == 0 ? 100000 : userId);
+        // 存储session
         requestContext.save(session);
         Map<String, Object> user = new HashMap<>();
         user.put("userName", userName);

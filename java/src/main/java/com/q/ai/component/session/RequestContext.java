@@ -8,10 +8,8 @@ import javax.annotation.Resource;
 @Component
 public class RequestContext {
 
-
     //MDC为“Mapped Diagnostic Context"
     public static final String TRACK_ID = "trackId";
-
 
     @Resource(name = "mysql")
     private SessionUtil sessionUtil;
@@ -37,7 +35,6 @@ public class RequestContext {
     public Session getSession() {
         return session.get();
     }
-
 
     /**
      * save into threadLocal

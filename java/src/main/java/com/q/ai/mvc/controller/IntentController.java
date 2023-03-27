@@ -40,6 +40,12 @@ public class IntentController {
     }
 
 
+    /**
+     * 获取意图列表数据
+     * @param number
+     * @param size
+     * @return
+     */
     @GetMapping("/getList")
     public Rs getList(@RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
@@ -90,7 +96,6 @@ public class IntentController {
         intentService.removeIntentIdsFromRobot(intentIdList, robotId);
         return Rs.buildOK("移除成功");
     }
-
 
     @GetMapping(value = "/delByIds")
     public Rs delByIds(@RequestParam String ids) {

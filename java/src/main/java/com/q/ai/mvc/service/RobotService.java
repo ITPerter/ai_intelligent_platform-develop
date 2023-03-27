@@ -65,11 +65,21 @@ public class RobotService {
         return robotMapper.getById(id);
     }
 
+    /**
+     * 获取机器人数量并将其设置为分页总数
+     * @param page
+     * @return
+     */
     public Page getPage(Page page) {
         page.setTotal(robotMapper.getCount());
         return page;
     }
 
+    /**
+     * 获取机器人分页数据
+     * @param page
+     * @return
+     */
     public List<Robot> getList(Page page) {
         return robotMapper.getList(page.getOffset(), page.getLimit());
     }
@@ -221,6 +231,16 @@ public class RobotService {
 
 
     }
+
+    /**
+     * 聊天接口
+     * @param robotId
+     * @param chatMsg
+     * @param userId
+     * @param token
+     * @param data
+     * @return
+     */
     public ChatVo chat2(int robotId, String chatMsg,String userId,String token,JSONObject data) {
         if (chatMsg.length() > 200) {
             chatMsg = chatMsg.substring(0, 200);
@@ -366,6 +386,12 @@ public class RobotService {
         }
         return chatVo;
     }
+
+    /**
+     * 存储一个机器人
+     * @param robot
+     * @return
+     */
     public Robot save(Robot robot) {
         if (robot.getId() != 0) {//编辑
             robot.setUpdateTime(LocalDateTime.now());
@@ -383,13 +409,24 @@ public class RobotService {
         return robot;
     }
 
+
+    /**
+     * 通过id列表删除机器人
+     * @param robotIdList
+     * @return
+     */
     @Transient
     public int delByIdList(List<Integer> robotIdList) {
         robot2IntentDao.delByRobotIdList(robotIdList);
         return robotMapper.delByIdList(robotIdList);
     }
 
-
+    /**
+     * 未写完
+     * @param robotId
+     * @param intentIdList
+     * @return
+     */
     public int addIntents(String robotId, List<Integer> intentIdList) {
         //todo here1
         // 1. slotdao  slotvaluedao
@@ -398,6 +435,11 @@ public class RobotService {
         return robot2IntentDao.inserts(robot2Intents);
     }
 
+    /**
+     * 未写完
+     * @param robotIdList
+     * @return
+     */
     public int delIntentsByRobotIdList(List<Integer> robotIdList) {
         return robot2IntentDao.delByRobotIdList(robotIdList);
     }

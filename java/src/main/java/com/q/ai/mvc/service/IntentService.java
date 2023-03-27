@@ -9,6 +9,7 @@ import com.q.ai.mvc.dao.Robot2IntentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,29 +17,48 @@ import java.util.List;
 
 @Service
 public class IntentService {
-
-
-    @Autowired
+    @Resource
     IntentDao intentDao;
-    @Autowired
+    @Resource
     Robot2IntentDao robot2IntentDao;
-    @Autowired
+    @Resource
     RequestContext requestContext;
 
 
+    /**
+     * 通过意图id获取意图
+     * @param id
+     * @return
+     */
     public Intent getById(int id) {
         return intentDao.getById(id);
     }
 
+    /**
+     * 通过编码获取意图
+     * @param number
+     * @return
+     */
     public Intent getByNumber(String number) {
         return intentDao.getByNumber(number);
     }
 
+    /**
+     * 获取意图分页数据
+     * @param page      分页数据
+     * @return
+     */
     public List<Intent> getList(Page page) {
         page.setTotal(intentDao.getCount());
         return intentDao.getList(page.getOffset(), page.getLimit());
     }
 
+    /**
+     * 通过机器人id获取 机器人意图 分页数据
+     * @param robotId
+     * @param page
+     * @return
+     */
     public List<Intent> getListByRobotId(int robotId,Page page) {
         page.setTotal(intentDao.getListByRobotIdCount(robotId));
         return intentDao.getListByRobotId(robotId,page.getOffset(), page.getLimit());
@@ -69,6 +89,12 @@ public class IntentService {
         return intent;
     }
 
+    /**
+     * 为一个机器人添加意图
+     * @param intentIdList  意图列表
+     * @param robotId   机器人id
+     * @return
+     */
     public int add2Robot(List<Integer> intentIdList,int robotId){
 
         List<Robot2Intent> robot2IntentList = new ArrayList<>();
@@ -86,11 +112,21 @@ public class IntentService {
 
     }
 
-
+    /**
+     * 删除意图与机器人的所有关联（针对意图与机器人关联表）
+     * @param intentIdList  意图列表
+     * @param robotId   机器人id
+     * @return
+     */
     public int removeIntentIdsFromRobot(List<Integer> intentIdList,int robotId){
         return robot2IntentDao.delByIntentIdListAndRobotId(intentIdList,robotId);
     }
 
+    /**
+     * 通过意图id删除意图数据（可连续删除多条数据，带循环）
+     * @param idList
+     * @return
+     */
     public int delByIdList(List<Integer> idList){
         return intentDao.delByIdList(idList);
     }

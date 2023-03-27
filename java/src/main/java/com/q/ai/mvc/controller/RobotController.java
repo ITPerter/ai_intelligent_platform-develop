@@ -32,7 +32,7 @@ public class RobotController {
 
     @ApiOperation(value = "获取机器人id", httpMethod = "GET")
     @ApiResponses(
-            @ApiResponse(code = 200, message = "returN",
+            @ApiResponse(code = 200, message = "return",
                     response = Rs.class,
                     reference = "C:/hello.json",
                     responseContainer = "list",

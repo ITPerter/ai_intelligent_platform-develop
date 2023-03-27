@@ -38,8 +38,6 @@
         select * from intent2Slot where intentId = #{intentId} order by seq desc limit 1
     </select>
 
-
-
     <insert id="inserts" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
         insert into intent2Slot(
         intentId,
@@ -49,7 +47,7 @@
         createTime
         ) values
         <foreach collection="list" item="item" separator=",">
-            (#{item.intentId},#{item.slotId},#{item.seq},#{item.creator},#{item.createTime} )
+            (#{item.intentId},#{item.slotId},#{item.seq},#{item.creator},#{item.createTime})
         </foreach>
     </insert>
 

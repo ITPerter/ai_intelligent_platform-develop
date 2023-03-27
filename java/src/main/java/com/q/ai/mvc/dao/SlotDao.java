@@ -24,5 +24,10 @@ public interface SlotDao {
 
     int update(Slot slot);
 
+    /**
+     * 通过词槽id列表删除删除一些词槽数据
+     * @param idList
+     * @return
+     */
     int delByIdList(@Param("list") List<Integer> idList);
 }

@@ -5,6 +5,9 @@ import com.q.ai.component.enuz.SLOT_TYPE;
 
 import java.time.LocalDateTime;
 
+/**
+ *  词槽实体类
+ */
 public class Slot {
 
     private int id;

@@ -13,37 +13,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *      des: 词槽业务
+ */
 @Service
 public class SlotService {
 
+    @Resource
+    private SlotDao slotDao;
+    @Resource
+    private Intent2SlotDao intent2SlotDao;
+    @Resource
+    private RequestContext requestContext;
 
-    @Autowired
-    SlotDao slotDao;
-    @Autowired
-    Intent2SlotDao intent2SlotDao;
-    @Autowired
-    RequestContext requestContext;
-
-
+    /**
+     * 通过id查询词槽
+     * @param id    词槽id
+     * @return      词槽表中数据
+     */
     public Slot getById(int id) {
         return slotDao.getById(id);
     }
 
+    /**
+     * 通过编码查询词槽
+     * @param number    词槽编码（FNumber）
+     * @return      词槽表中数据
+     */
     public Slot getByNumber(String number) {
         return slotDao.getByNumber(number);
     }
 
+    /**
+     * 获取词槽列表
+     * @param page      分页数据
+     * @return     返回设置条数的词槽表数据
+     */
     public List<Slot> getList(Page page) {
         page.setTotal(slotDao.getCount());
         return slotDao.getList(page.getOffset(), page.getLimit());
     }
 
+    /**
+     * 通过意图id查询词槽信息
+     * @param intentId      意图id
+     * @param page   分页对象
+     * @return  返回有限条数的词槽表数据
+     */
     public List<Slot> getListByIntentId(int intentId, Page page) {
         page.setTotal(slotDao.getListByIntentIdCount(intentId));
         return slotDao.getListByIntentId(intentId, page.getOffset(), page.getLimit());
@@ -52,38 +75,42 @@ public class SlotService {
 
     /**
      * 只在新建时去匹配关联关系
-     * @param slot
-     * @param intentId
-     * @return
+     * @param slot      词槽对象
+     * @param intentId      意图对象
+     * @return      返回一个经过加工的词槽对象
      */
-
     @Transient
     public Slot saveWithIntentId(Slot slot,Integer intentId) {
         if(StringUtils.isEmpty(slot.getType())){
             slot.setType(SLOT_TYPE.TEXT);
         }
-        if (slot.getId() != 0) {//编辑
+        if (slot.getId() != 0) {
+            // 更新
             slot.setUpdateTime(LocalDateTime.now());
             slotDao.update(slot);
-        } else {//新增
+        } else {
+            // 新增
             slot.setCreator(requestContext.getSession().getUserId());
             slot.setCreateTime(LocalDateTime.now());
             slot.setUpdateTime(LocalDateTime.now());
             slotDao.insert(slot);
-            if(intentId != null){//
+            if(intentId != null){
+                // 判断意图id是否为空
+                // 建立词槽（slot）和意图（intent）对应关系
                 add2Intent(Collections.singletonList(slot.getId()),intentId);
             }
         }
-
         return slot;
     }
 
     /**
-     *
-     * 词槽添加到意图
+     *  添加意图
+     * @param slotIdList    词槽列表
+     * @param intentId      意图id
+     * @return      返回插入结果
      */
     public int add2Intent(List<Integer> slotIdList,int intentId){
-        //查询intent下词槽的最大序号
+        // 查询意图（intent）下词槽的最大序号
         Intent2Slot maxSeqIntent2Slot = intent2SlotDao.getSlotMaxSeqByIntentId(intentId);
         int seq = 0;
         if(null != maxSeqIntent2Slot){
@@ -105,24 +132,32 @@ public class SlotService {
 
     }
 
+    /**
+     *  交换词槽的顺序，并重新获取新的词槽
+     * @param intentId      意图id
+     * @param slotId        词槽id
+     * @param upOrDown      上移 or 下移
+     * @param page      分页数据
+     * @return
+     */
     public List<Slot> changSeqAndGetList(int intentId,int slotId,int upOrDown,Page page){
-        if(Math.abs(upOrDown)!=1){
+        if(Math.abs(upOrDown) != 1){
             throw new RsException("顺序调整取值必须是-1 或 1");
         }
-        Intent2Slot intent2Slot = intent2SlotDao.getByIntentIdAndSlotId(intentId,slotId);
+        Intent2Slot intent2Slot = intent2SlotDao.getByIntentIdAndSlotId(intentId, slotId);
         if(intent2Slot == null){
             throw new RsException("要调整的词槽关系不存在");
         }
         int seq = intent2Slot.getSeq();
-
         Intent2Slot intent2Slot2Change;
-        if(upOrDown == 1){
+        if(upOrDown == 1) {
             intent2Slot2Change  = intent2SlotDao.getGreaterSeq(intentId, seq);
         }else {
-            intent2Slot2Change = intent2SlotDao.getLessSeq(intentId,seq);
+            intent2Slot2Change = intent2SlotDao.getLessSeq(intentId, seq);
         }
 
-        if(intent2Slot2Change == null){//与最前或者最后交换
+        if(intent2Slot2Change == null){
+            // 与最前或者最后交换
             throw new RsException("已经到顶/底了");
         }
 
@@ -139,12 +174,21 @@ public class SlotService {
 
     }
 
+    /**
+     * 删除意图、词槽关联表中的同一意图下的多个对应词槽关系
+     * @param intentIdList
+     * @param intentId
+     * @return
+     */
     public int removeIntentIdsFromRobot(List<Integer> intentIdList,int intentId){
         return intent2SlotDao.delBySlotIdListAndIntentId(intentIdList,intentId);
     }
 
-
-
+    /**
+     * 通过词槽id列表删除删除一些词槽数据
+     * @param idList
+     * @return
+     */
     public int delByIdList(List<Integer> idList){
         return slotDao.delByIdList(idList);
     }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +24,12 @@ import java.util.List;
 @Service
 public class BaseDataValueService {
 
-
-    @Autowired
+    @Resource
     BaseDataValueDao baseDataValueDao;
-    @Autowired
+    @Resource
     SlotService slotService;
-    @Autowired
+    @Resource
     RequestContext requestContext;
-
 
     public BaseDataValue getByNumber(String number) {
         return baseDataValueDao.getByNumber(number);
@@ -44,10 +43,8 @@ public class BaseDataValueService {
         return baseDataValueDao.getListByBaseDataNumber(baseDataNumber, page);
     }
 
-
     /**
      * number字段唯一，重复则编辑
-     *
      * @param baseDataValue
      * @return
      */

@@ -19,6 +19,7 @@ import com.q.ai.mvc.service.BaseDataValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import java.util.Map;
 @Component("mysql")
 public class MySqlSessionUtil implements SessionUtil {
 
-    @Autowired
+    @Resource
     private SessionDao sessionDao;
     @Autowired
     IntentService intentService;
