@@ -1,6 +1,7 @@
 package com.q.ai.mvc.dao;
 
 import com.q.ai.component.io.Page;
+import com.q.ai.mvc.dao.po.Intention;
 import com.q.ai.mvc.dao.po.TSkill;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,5 +36,6 @@ public interface TSkillDao {
      * @return
      */
     public List<TSkill> getTaskListByName(@Param("name") String name,@Param("offset") int offset, @Param("limit") int limit);
+
 
 }

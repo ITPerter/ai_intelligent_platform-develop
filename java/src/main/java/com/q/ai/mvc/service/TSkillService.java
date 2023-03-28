@@ -1,6 +1,7 @@
 package com.q.ai.mvc.service;
 
 import com.q.ai.mvc.dao.TSkillDao;
+import com.q.ai.mvc.dao.po.Intention;
 import com.q.ai.mvc.dao.po.TSkill;
 import org.springframework.stereotype.Service;
 
@@ -49,4 +50,6 @@ public class TSkillService {
     public List<TSkill> getTaskListByName(String name,int number,int size) {
         return tSkillDao.getTaskListByName(name,number,size);
     }
+
+
 }

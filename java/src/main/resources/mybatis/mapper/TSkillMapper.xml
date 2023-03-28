@@ -51,4 +51,11 @@
         select * from t_skill where FName like concat('%',#{name},'%') and FType=10 limit #{offset},#{limit}
     </select>
 
+    <select id="getIntentionByTaskId" resultMap="tSkill">
+        SELECT ti.* FROM t_skill ts
+            LEFT JOIN t_skillintention tsl ON ts.FID = tsl.FSkillID
+            LEFT JOIN t_intention ti ON ti.FID = tsl.FIntentionID
+        WHERE ts.FID=#{id}
+    </select>
+
 </mapper>
