@@ -1,7 +1,5 @@
 package com.q.ai.mvc.service;
 
-import com.q.ai.biz.entity.ChatSlot;
-import com.q.ai.component.enuz.SLOT_STATE;
 import com.q.ai.component.enuz.SLOT_TYPE;
 import com.q.ai.component.io.RsException;
 import com.q.ai.component.session.RequestContext;
@@ -10,7 +8,6 @@ import com.q.ai.mvc.dao.po.BaseDataValue;
 import com.q.ai.component.io.Page;
 import com.q.ai.mvc.dao.po.Slot;
 import com.q.ai.mvc.esDao.BaseDataValueDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,7 +24,7 @@ public class BaseDataValueService {
     @Resource
     BaseDataValueDao baseDataValueDao;
     @Resource
-    SlotService slotService;
+    WordSlotService wordSlotService;
     @Resource
     RequestContext requestContext;
 
@@ -96,7 +93,7 @@ public class BaseDataValueService {
      * @return
      */
     public boolean isVerifySlot(int slotId, SLOT_TYPE slotType, String origin) {
-        Slot slot = slotService.getById(slotId);
+        Slot slot = wordSlotService.getById(slotId);
         if (null == slot) {
             throw new RsException("词槽不存在");
         }

@@ -7,9 +7,8 @@ import com.q.ai.mvc.dao.po.Slot;
 import com.q.ai.component.io.Page;
 import com.q.ai.component.io.RsException;
 import com.q.ai.mvc.dao.Intent2SlotDao;
-import com.q.ai.mvc.dao.SlotDao;
-import com.time.util.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.q.ai.mvc.dao.WordSlotDao;
+import com.q.ai.mvc.dao.po.WordSlot;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,14 +23,23 @@ import java.util.List;
  *      des: 词槽业务
  */
 @Service
-public class SlotService {
+public class WordSlotService {
 
     @Resource
-    private SlotDao slotDao;
+    private WordSlotDao wordSlotDao;
     @Resource
     private Intent2SlotDao intent2SlotDao;
     @Resource
     private RequestContext requestContext;
+
+    /**
+     * 通过意图id获取与意图有关的词槽
+     * @param id
+     * @return
+     */
+    public List<WordSlot> getWordSlotByIntentionId(Long id) {
+        return wordSlotDao.getWordSlotByIntentionId(id);
+    }
 
     /**
      * 通过id查询词槽
@@ -39,7 +47,7 @@ public class SlotService {
      * @return      词槽表中数据
      */
     public Slot getById(int id) {
-        return slotDao.getById(id);
+        return wordSlotDao.getById(id);
     }
 
     /**
@@ -48,7 +56,7 @@ public class SlotService {
      * @return      词槽表中数据
      */
     public Slot getByNumber(String number) {
-        return slotDao.getByNumber(number);
+        return wordSlotDao.getByNumber(number);
     }
 
     /**
@@ -57,8 +65,8 @@ public class SlotService {
      * @return     返回设置条数的词槽表数据
      */
     public List<Slot> getList(Page page) {
-        page.setTotal(slotDao.getCount());
-        return slotDao.getList(page.getOffset(), page.getLimit());
+        page.setTotal(wordSlotDao.getCount());
+        return wordSlotDao.getList(page.getOffset(), page.getLimit());
     }
 
     /**
@@ -68,8 +76,8 @@ public class SlotService {
      * @return  返回有限条数的词槽表数据
      */
     public List<Slot> getListByIntentId(int intentId, Page page) {
-        page.setTotal(slotDao.getListByIntentIdCount(intentId));
-        return slotDao.getListByIntentId(intentId, page.getOffset(), page.getLimit());
+        page.setTotal(wordSlotDao.getListByIntentIdCount(intentId));
+        return wordSlotDao.getListByIntentId(intentId, page.getOffset(), page.getLimit());
     }
 
 
@@ -87,13 +95,13 @@ public class SlotService {
         if (slot.getId() != 0) {
             // 更新
             slot.setUpdateTime(LocalDateTime.now());
-            slotDao.update(slot);
+            wordSlotDao.update(slot);
         } else {
             // 新增
             slot.setCreator(requestContext.getSession().getUserId());
             slot.setCreateTime(LocalDateTime.now());
             slot.setUpdateTime(LocalDateTime.now());
-            slotDao.insert(slot);
+            wordSlotDao.insert(slot);
             if(intentId != null){
                 // 判断意图id是否为空
                 // 建立词槽（slot）和意图（intent）对应关系
@@ -190,7 +198,7 @@ public class SlotService {
      * @return
      */
     public int delByIdList(List<Integer> idList){
-        return slotDao.delByIdList(idList);
+        return wordSlotDao.delByIdList(idList);
     }
 
 

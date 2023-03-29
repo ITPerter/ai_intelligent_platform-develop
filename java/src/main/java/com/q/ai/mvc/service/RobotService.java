@@ -1,9 +1,7 @@
 package com.q.ai.mvc.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
 import com.q.ai.biz.entity.ChatIntent;
 import com.q.ai.biz.entity.ChatSlot;
 import com.q.ai.biz.entity.ChatVo;
@@ -30,12 +28,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.beans.Transient;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import static com.q.ai.component.enuz.SLOT_TYPE.BASE_DATA;
 
 @Service
 public class RobotService {
@@ -50,7 +44,7 @@ public class RobotService {
     @Autowired
     NlpService nlpService;
     @Autowired
-    private SlotService slotService;
+    private WordSlotService wordSlotService;
     @Autowired
     BaseDataValueService baseDataValueService;
     @Autowired
@@ -134,7 +128,7 @@ public class RobotService {
                     SLOT_TYPE slotType = chatSlot.getType();
                     String origin = chatSlot.getOriginString();
 
-                    Slot slot = slotService.getById(slotId);
+                    Slot slot = wordSlotService.getById(slotId);
                     if (null == slot) {
                         throw new RsException("词槽不存在");
                     }
@@ -300,7 +294,7 @@ public class RobotService {
                     SLOT_TYPE slotType = chatSlot.getType();
                     String origin = chatSlot.getOriginString();
 
-                    Slot slot = slotService.getById(slotId);
+                    Slot slot = wordSlotService.getById(slotId);
                     if (null == slot) {
                         throw new RsException("词槽不存在");
                     }

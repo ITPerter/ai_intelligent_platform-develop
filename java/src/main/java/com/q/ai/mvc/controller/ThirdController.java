@@ -18,14 +18,13 @@ import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
 import com.q.ai.mvc.service.BaseDataService;
 import com.q.ai.mvc.service.RobotService;
-import com.q.ai.mvc.service.SlotService;
+import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.service.BaseDataValueService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -42,7 +41,7 @@ public class ThirdController {
     @Autowired
     private RobotService robotService;
     @Autowired
-    private SlotService slotService;
+    private WordSlotService wordSlotService;
     @Autowired
     private BaseDataService baseDataService;
     @Autowired

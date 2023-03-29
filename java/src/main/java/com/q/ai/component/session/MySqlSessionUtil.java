@@ -14,7 +14,7 @@ import com.q.ai.mvc.dao.po.Intent;
 import com.q.ai.mvc.dao.po.SessionPO;
 import com.q.ai.mvc.dao.po.Slot;
 import com.q.ai.mvc.service.IntentService;
-import com.q.ai.mvc.service.SlotService;
+import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.service.BaseDataValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ public class MySqlSessionUtil implements SessionUtil {
     @Autowired
     IntentService intentService;
     @Autowired
-    SlotService slotService;
+    WordSlotService wordSlotService;
     @Autowired
     BaseDataValueService baseDataValueService;
 
@@ -123,7 +123,7 @@ public class MySqlSessionUtil implements SessionUtil {
     private Session newCurrentIntent(Session session, Intent nlpIntent, Map<String, Object> slot2ValueMap) {
         ChatIntent chatIntent = new ChatIntent(nlpIntent);
 
-        List<Slot> slotList = slotService.getListByIntentId(nlpIntent.getId(), new Page(1, 100));
+        List<Slot> slotList = wordSlotService.getListByIntentId(nlpIntent.getId(), new Page(1, 100));
 
         List<ChatSlot> chatSlotList = new ArrayList<>();
 

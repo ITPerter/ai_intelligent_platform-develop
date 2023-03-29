@@ -1,12 +1,13 @@
 package com.q.ai.mvc.dao;
 
 import com.q.ai.mvc.dao.po.Slot;
+import com.q.ai.mvc.dao.po.WordSlot;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 
-public interface SlotDao {
+public interface WordSlotDao {
 
     Slot getById(@Param("id") int id);
 
@@ -30,4 +31,11 @@ public interface SlotDao {
      * @return
      */
     int delByIdList(@Param("list") List<Integer> idList);
+
+    /**
+     * 通过意图id获取与意图有关的词槽
+     * @param id
+     * @return
+     */
+    List<WordSlot> getWordSlotByIntentionId(@Param("id") Long id);
 }

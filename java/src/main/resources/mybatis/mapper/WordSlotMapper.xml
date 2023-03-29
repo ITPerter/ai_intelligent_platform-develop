@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.q.ai.mvc.dao.SlotDao">
+<mapper namespace="com.q.ai.mvc.dao.WordSlotDao">
+    <resultMap id="wordSlot" type="com.q.ai.mvc.dao.po.WordSlot">
+        <id property="id" column="FID"/>
+        <result property="number" column="FNumber"/>
+        <result property="name" column="FName"/>
+        <result property="intentionId" column="FIntentionID"/>
+        <result property="typeId" column="FTypeId"/>
+        <result property="isSpec" column="FIsSpec"/>
+        <result property="queryConfigID" column="FQueryConfigID"/>
+        <result property="voiceTemplet" column="FVoiceTemplet"/>
+        <result property="isMust" column="isMust"/>
+        <result property="useDefaultLoc" column="FUseDefaultLoc"/>
+        <result property="isFromParent" column="isFromParent"/>
+        <result property="createTime" column="FCreateTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+    <resultMap id="comment" type="com.q.ai.biz.entity.IntentionWordSlot">
+        <id property="id" column="FID"/>
+        <result property="number" column="FNumber"/>
+        <result property="name" column="FName"/>
+        <result property="intentionId" column="FIntentionID"/>
+        <result property="typeId" column="FTypeId"/>
+        <result property="isSpec" column="FIsSpec"/>
+        <result property="queryConfigID" column="FQueryConfigID"/>
+        <result property="voiceTemplet" column="FVoiceTemplet"/>
+        <result property="isMust" column="isMust"/>
+        <result property="useDefaultLoc" column="FUseDefaultLoc"/>
+        <result property="isFromParent" column="isFromParent"/>
+        <result property="createTime" column="FCreateTime"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="intentionName" column="FName"/>
+        <result property="intentionNumber" column="FNumber"/>
+        <result property="intentionComment" column="fComment"/>
+    </resultMap>
 
     <resultMap id="slot" type="com.q.ai.mvc.dao.po.Slot">
         <result property="id" column="id"/>
@@ -18,6 +52,11 @@
         <result property="updateTime" column="updateTime"/>
     </resultMap>
 
+    <select id="getWordSlotByIntentionId" resultMap="comment">
+        SELECT tw.FIntentionID,tw.FName,ti.FID,ti.FName,ti.FNumber,ti.fComment FROM t_intention ti
+            LEFT JOIN t_wordslot tw ON ti.FID=tw.FIntentionID
+            WHERE ti.FID=#{id};
+    </select>
 
     <select id="getById" resultType="com.q.ai.mvc.dao.po.Slot">
         select * from slot where id=#{id}

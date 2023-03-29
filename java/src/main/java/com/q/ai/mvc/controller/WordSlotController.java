@@ -6,8 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.q.ai.component.annotation.Auth;
 import com.q.ai.component.enuz.AUTH_TYPE;
 import com.q.ai.component.enuz.SLOT_TYPE;
-import com.q.ai.mvc.dao.po.BaseDataValue;
-import com.q.ai.mvc.service.SlotService;
+import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.dao.po.Slot;
 import com.q.ai.component.io.Page;
 import com.q.ai.component.io.ParamJSON;
@@ -15,7 +14,6 @@ import com.q.ai.component.io.Rs;
 import com.q.ai.component.io.RsException;
 import com.q.ai.mvc.service.IntentService;
 import com.q.ai.mvc.service.BaseDataValueService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,10 +27,10 @@ import java.util.List;
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/slot")
-public class SlotController {
+public class WordSlotController {
 
     @Resource
-    private SlotService slotService;
+    private WordSlotService wordSlotService;
     @Resource
     private IntentService intentService;
     @Resource
@@ -45,7 +43,7 @@ public class SlotController {
      */
     @GetMapping("/getById")
     public Rs getById(@RequestParam int id) {
-        Slot slot = slotService.getById(id);
+        Slot slot = wordSlotService.getById(id);
         if (null != slot) {
             return Rs.buildData(slot);
         }
@@ -61,7 +59,7 @@ public class SlotController {
     @GetMapping("/getList")
     public Rs getList(@RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
-        List<Slot> slots = slotService.getList(page);
+        List<Slot> slots = wordSlotService.getList(page);
         return Rs.buildList(slots, page);
     }
 
@@ -75,7 +73,7 @@ public class SlotController {
     @GetMapping("/getListByIntentId")
     public Rs getListByIntentId(@RequestParam int intentId, @RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
-        List<Slot> slots = slotService.getListByIntentId(intentId, page);
+        List<Slot> slots = wordSlotService.getListByIntentId(intentId, page);
         return Rs.buildList(slots, page);
     }
 
@@ -101,7 +99,7 @@ public class SlotController {
 
         List<Integer> slotIdList = JSONObject.parseArray(slotJson.toJSONString(), Integer.class);
 
-        slotService.add2Intent(slotIdList, intentId);
+        wordSlotService.add2Intent(slotIdList, intentId);
         return Rs.buildOK("添加成功");
     }
 
@@ -117,7 +115,7 @@ public class SlotController {
         Integer slotId = param.getMustInteger("slotId");
         Integer upOrDown = param.getMustInteger("upOrDown");
         Page page = param.getPage();
-        List<Slot> slotList = slotService.changSeqAndGetList(intentId, slotId, upOrDown, page);
+        List<Slot> slotList = wordSlotService.changSeqAndGetList(intentId, slotId, upOrDown, page);
         return Rs.buildList(slotList, page);
     }
 
@@ -130,7 +128,7 @@ public class SlotController {
 
         List<Integer> slotIdList = JSONObject.parseArray(slotJson.toJSONString(), Integer.class);
 
-        slotService.removeIntentIdsFromRobot(slotIdList, intentId);
+        wordSlotService.removeIntentIdsFromRobot(slotIdList, intentId);
         return Rs.buildOK("移除成功");
     }
 
@@ -139,7 +137,7 @@ public class SlotController {
     public Rs save(@RequestBody ParamJSON param) {
         Slot slot = param.getMustJavaObject("slot", Slot.class);
         Integer intentId = param.getInteger("intentId");
-        slotService.saveWithIntentId(slot, intentId);
+        wordSlotService.saveWithIntentId(slot, intentId);
         return Rs.buildData(slot);
     }
 
@@ -150,7 +148,7 @@ public class SlotController {
         for (String s : idArray) {
             idList.add(Integer.valueOf(s));
         }
-        slotService.delByIdList(idList);
+        wordSlotService.delByIdList(idList);
         return Rs.buildOK("删除成功");
     }
 

@@ -4,9 +4,6 @@ package com.q.ai.mvc.controller;
  * 词槽更新接口+运行时接口
  */
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.Hashing;
-import com.mysql.cj.util.StringUtils;
 import com.q.ai.biz.entity.Session;
 import com.q.ai.component.annotation.Auth;
 import com.q.ai.component.enuz.AUTH_TYPE;
@@ -14,8 +11,6 @@ import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
 import com.q.ai.component.io.RsException;
 import com.q.ai.component.session.RequestContext;
-import com.q.ai.mvc.dao.po.Slot;
-import com.q.ai.mvc.service.SlotService;
 import com.q.ai.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 
 @CrossOrigin(origins = {"*"})

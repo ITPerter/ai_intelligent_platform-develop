@@ -14,7 +14,7 @@ public interface IntentionDao {
      * @param size
      * @return
      */
-    public List<Intention> getIntentionByTaskId(@Param("id") int id,@Param("offset") int offset,@Param("size") int size);
+    public List<Intention> getIntentionByTaskId(@Param("id") int id,@Param("number") int number,@Param("size") int size);
 
     /**
      * 通过任务id获取对应意图数量

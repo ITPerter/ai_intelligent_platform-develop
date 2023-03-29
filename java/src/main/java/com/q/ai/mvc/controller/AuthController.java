@@ -11,8 +11,7 @@ import com.q.ai.component.enuz.AUTH_TYPE;
 import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
 import com.q.ai.component.io.RsException;
-import com.q.ai.mvc.dao.po.Slot;
-import com.q.ai.mvc.service.SlotService;
+import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +37,7 @@ public class AuthController {
     private RequestContext requestContext;
 
     @Autowired
-    SlotService slotService;
+    WordSlotService wordSlotService;
 
     @Value("#{${user_map}}")
     private Map<String, String> userMap;

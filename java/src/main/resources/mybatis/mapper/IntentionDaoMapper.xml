@@ -40,7 +40,7 @@
         SELECT ti.* FROM t_skill ts
             LEFT JOIN t_skillintention tsl ON ts.FID = tsl.FSkillID
             LEFT JOIN t_intention ti ON ti.FID = tsl.FIntentionID
-        WHERE ts.FID=#{id} limit #{offset},#{size}
+        WHERE ts.FID=#{id} limit #{number},#{size}
     </select>
 
     <select id="getCountByTaskId" resultType="int">

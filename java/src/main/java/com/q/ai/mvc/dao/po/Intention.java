@@ -1,7 +1,6 @@
 package com.q.ai.mvc.dao.po;
 
 import java.sql.Timestamp;
-import java.time.LocalTime;
 
 /**
  * 任务型技能意图表
@@ -23,9 +22,9 @@ public class Intention {
     private String type;
     private String comment;
     private Long creator;
-    private boolean isShowCard;
+    private int isShowCard;
     private String cardType;
-    private boolean autoReply;
+    private int autoReply;
 
     @Override
     public String toString() {
@@ -146,11 +145,11 @@ public class Intention {
         return this;
     }
 
-    public boolean isShowCard() {
+    public int isShowCard() {
         return isShowCard;
     }
 
-    public Intention setShowCard(boolean showCard) {
+    public Intention setShowCard(int showCard) {
         isShowCard = showCard;
         return this;
     }
@@ -164,11 +163,11 @@ public class Intention {
         return this;
     }
 
-    public boolean isAutoReply() {
+    public int getAutoReply() {
         return autoReply;
     }
 
-    public Intention setAutoReply(boolean autoReply) {
+    public Intention setAutoReply(int autoReply) {
         this.autoReply = autoReply;
         return this;
     }
