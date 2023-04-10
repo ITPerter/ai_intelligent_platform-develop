@@ -10,11 +10,11 @@
         <result property="isSpec" column="FIsSpec"/>
         <result property="queryConfigID" column="FQueryConfigID"/>
         <result property="voiceTemplet" column="FVoiceTemplet"/>
-        <result property="isMust" column="isMust"/>
+        <result property="isMust" column="FIsMust"/>
         <result property="useDefaultLoc" column="FUseDefaultLoc"/>
-        <result property="isFromParent" column="isFromParent"/>
+        <result property="isFromParent" column="FIsFromParent"/>
         <result property="createTime" column="FCreateTime"/>
-        <result property="updateTime" column="updateTime"/>
+        <result property="updateTime" column="FUpdateTime"/>
     </resultMap>
 
     <resultMap id="comment" type="com.q.ai.biz.entity.IntentionWordSlot">
@@ -52,16 +52,48 @@
         <result property="updateTime" column="updateTime"/>
     </resultMap>
 
+    <delete id="deleteSlot" parameterType="java.lang.Long">
+        delete from t_wordslot where FID in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="addSlot" parameterType="com.q.ai.mvc.dao.po.WordSlot" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_wordslot (FID,FName, FNumber, FVoiceTemplet, FCreateTime, FIntentionID) VALUES (#{id}, #{name}, #{number}, #{voiceTemplet}, #{createTime}, #{intentionId})
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateSlot" parameterType="com.q.ai.mvc.dao.po.WordSlot">
+        UPDATE t_wordslot
+        <set>
+            <if test="name!=null">FName=#{name},</if>
+            <if test="number!=null">FNumber=#{number},</if>
+            <if test="voiceTemplet!=null">FVoiceTemplet=#{voiceTemplet},</if>
+            <if test="updateTime!=null">FUpdateTime=#{updateTime}</if>
+        </set>
+        where FID=#{id};
+    </update>
+
+    <select id="getWordSlotById" parameterType="java.lang.Long" resultMap="wordSlot">
+        SELECT * FROM `t_wordslot` WHERE FID=#{id};
+    </select>
+
+    <select id="getSlotByNumber" parameterType="java.lang.String" resultMap="wordSlot">
+        SELECT * FROM `t_wordslot` WHERE FIntentionID in (SELECT FID FROM t_intention WHERE FNumber=#{number})
+    </select>
+
     <select id="getWordSlotByIntentionId" resultMap="comment">
         SELECT tw.FIntentionID,tw.FName,ti.FID,ti.FName,ti.FNumber,ti.fComment FROM t_intention ti
             LEFT JOIN t_wordslot tw ON ti.FID=tw.FIntentionID
             WHERE ti.FID=#{id};
     </select>
 
-    <select id="getById" resultType="com.q.ai.mvc.dao.po.Slot">
-        select * from slot where id=#{id}
+    <select id="getById" resultType="com.q.ai.mvc.dao.po.WordSlot">
+        select * from t_wordslot where FID=#{id}
     </select>
-
 
     <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.Slot">
         select * from slot where number=#{number}
@@ -74,7 +106,6 @@
     <select id="getList" resultMap="slot">
         select * from slot limit #{offset},#{limit}
     </select>
-
 
     <select id="getListByIntentId" resultMap="slot">
         SELECT s.* FROM intent2Slot AS i
@@ -124,7 +155,6 @@
         )
     </insert>
 
-
     <update id="update" parameterType="com.q.ai.mvc.dao.po.Slot">
         update slot
         <set>
@@ -142,7 +172,6 @@
         where id=#{id};
     </update>
 
-
     <delete id="delByIdList" parameterType="list" >
         delete from slot where id in
         <foreach collection="list" item="id" open="(" close=")" separator=",">
@@ -150,4 +179,10 @@
         </foreach>
     </delete>
 
+    <select id="getWordSlotByIntentionIds" resultMap="slot">
+        SELECT FName FROM `t_wordslot` WHERE FIntentionID IN
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

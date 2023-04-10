@@ -144,6 +144,4 @@ public class BaseDataValueDao extends EsBaseDao<BaseDataValue> {
                 .field("updateTime", baseDataValue.getUpdateTime())
                 .endObject();
     }
-
-
 }

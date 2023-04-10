@@ -1,6 +1,6 @@
 package com.q.ai.mvc.dao.po;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class WordSlot {
     private Long id;
@@ -14,8 +14,8 @@ public class WordSlot {
     private int isMust;
     private int useDefaultLoc;
     private int isFromParent;
-    private Timestamp createTime;
-    private Timestamp updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
     @Override
     public String toString() {
@@ -135,20 +135,20 @@ public class WordSlot {
         return this;
     }
 
-    public Timestamp getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public WordSlot setCreateTime(Timestamp createTime) {
+    public WordSlot setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
         return this;
     }
 
-    public Timestamp getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public WordSlot setUpdateTime(Timestamp updateTime) {
+    public WordSlot setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
         return this;
     }

@@ -3,7 +3,7 @@ package com.q.ai.mvc.dao.po;
 /**
  * 技能意图关联表
  */
-public class SkillLintention {
+public class SkillIntention {
     private Long id;
     private Long skillId;
     private Long intentionId;
@@ -27,7 +27,7 @@ public class SkillLintention {
         return id;
     }
 
-    public SkillLintention setId(Long id) {
+    public SkillIntention setId(Long id) {
         this.id = id;
         return this;
     }
@@ -36,7 +36,7 @@ public class SkillLintention {
         return skillId;
     }
 
-    public SkillLintention setSkillId(Long skillId) {
+    public SkillIntention setSkillId(Long skillId) {
         this.skillId = skillId;
         return this;
     }
@@ -45,7 +45,7 @@ public class SkillLintention {
         return intentionId;
     }
 
-    public SkillLintention setIntentionId(Long intentionId) {
+    public SkillIntention setIntentionId(Long intentionId) {
         this.intentionId = intentionId;
         return this;
     }
@@ -54,7 +54,7 @@ public class SkillLintention {
         return interfaceId;
     }
 
-    public SkillLintention setInterfaceId(Long interfaceId) {
+    public SkillIntention setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
         return this;
     }
@@ -63,7 +63,7 @@ public class SkillLintention {
         return UIStyleId;
     }
 
-    public SkillLintention setUIStyleId(Long UIStyleId) {
+    public SkillIntention setUIStyleId(Long UIStyleId) {
         this.UIStyleId = UIStyleId;
         return this;
     }
@@ -72,7 +72,7 @@ public class SkillLintention {
         return cardTemplate;
     }
 
-    public SkillLintention setCardTemplate(String cardTemplate) {
+    public SkillIntention setCardTemplate(String cardTemplate) {
         this.cardTemplate = cardTemplate;
         return this;
     }

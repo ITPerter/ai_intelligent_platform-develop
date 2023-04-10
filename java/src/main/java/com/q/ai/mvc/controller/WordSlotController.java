@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.q.ai.component.annotation.Auth;
 import com.q.ai.component.enuz.AUTH_TYPE;
 import com.q.ai.component.enuz.SLOT_TYPE;
+import com.q.ai.mvc.dao.po.WordSlot;
 import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.dao.po.Slot;
 import com.q.ai.component.io.Page;
@@ -29,6 +30,9 @@ import java.util.List;
 @RequestMapping("/slot")
 public class WordSlotController {
 
+    private String green = "\033[32m";
+    private String end = "\033[0m";
+
     @Resource
     private WordSlotService wordSlotService;
     @Resource
@@ -36,6 +40,68 @@ public class WordSlotController {
     @Resource
     private BaseDataValueService baseDataValueService;
 
+
+    /**
+     * 通过意图编码查询词槽信息
+     * @param number
+     * @return
+     */
+    @GetMapping("/getSlotByNumber")
+    public Rs getSlotByNumber(@RequestParam String number) {
+        List<WordSlot> slotByNumber = wordSlotService.getSlotByNumber(number);
+        return Rs.buildData(slotByNumber,"查询成功");
+    }
+
+    /**
+     * 通过id获取词槽信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/getWordSlotById")
+    public Rs getWordSlotById(@RequestParam Long id){
+        WordSlot slot = wordSlotService.getWordSlotById(id);
+        return Rs.buildData(slot,"查询成功");
+    }
+
+    @PostMapping("updateSlot")
+    public Rs updateSlot(@RequestBody ParamJSON paramJSON) {
+        WordSlot wordSlot = paramJSON.toJavaObject(WordSlot.class);
+        int i = wordSlotService.updateSlot(wordSlot);
+        if (i == 1){
+            return Rs.buildOK("成功修改");
+        }else {
+            return Rs.buildErr("修改失败");
+        }
+    }
+
+    @PutMapping("addSlot")
+    public Rs addSlot(@RequestBody ParamJSON paramJSON){
+        WordSlot wordSlot = paramJSON.toJavaObject(WordSlot.class);
+        int i = wordSlotService.addSlot(wordSlot);
+        if (i != 0){
+            return Rs.buildData(i,"添加成功");
+        }else {
+            return Rs.buildErr("添加失败");
+        }
+    }
+
+    @DeleteMapping("/deleteSlot")
+    public Rs deleteSlot(@RequestBody String ids){
+        System.out.println(ids);
+        String[] idArray = ids.split(",");
+        List<Long> idList = new ArrayList<>();
+        for (String s : idArray) {
+            idList.add(Long.valueOf(s));
+        }
+        int i = wordSlotService.deleteSlot(idList);
+        if (i != 0){
+            return Rs.buildData(i,"删除成功");
+        }else {
+            return Rs.buildErr("删除失败");
+        }
+    }
+
+// ---------------------------------------------------------------------------------------------------------------------
     /**
      * 通过id获取词槽数据
      * @param id
@@ -151,7 +217,6 @@ public class WordSlotController {
         wordSlotService.delByIdList(idList);
         return Rs.buildOK("删除成功");
     }
-
 
 
 }

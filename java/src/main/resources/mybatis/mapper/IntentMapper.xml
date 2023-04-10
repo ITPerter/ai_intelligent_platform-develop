@@ -13,6 +13,34 @@
         <result property="updateTime" column="updateTime"/>
     </resultMap>
 
+    <resultMap id="intention" type="com.q.ai.mvc.dao.po.Intention">
+        <id property="id" column="FID" />
+        <result property="number" column="FNumber" />
+        <result property="name" column="FName" />
+        <result property="starts" column="FStatus" />
+        <result property="createTime" column="fcreatetime" />
+        <result property="isConfirm" column="fisconfirm" />
+        <result property="confirmTemplate" column="FConfirmTemplate" />
+        <result property="parentId" column="FParentID" />
+        <result property="type" column="FType" />
+        <result property="comment" column="fComment" />
+        <result property="creator" column="fCreator" />
+        <result property="isShowCard" column="FIsShowCard" />
+        <result property="cardType" column="FCardType" />
+        <result property="autoReply" column="FAutoReply" />
+    </resultMap>
+    <!--
+        请注意，在使用MyBatis执行INSERT语句时，必须将useGeneratedKeys属性设置为true，
+        并将keyProperty属性设置为自增主键的属性名称。这样，MyBatis才能正确地获取插入的自增主键值。
+        在上面的示例中，我们使用了<selectKey>元素来获取自增主键的值。
+    -->
+    <!-- 在XML映射文件中定义INSERT语句和<selectKey>元素 -->
+    <insert id="addIntention" parameterType="com.q.ai.mvc.dao.po.Intention" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_intention (FName, FNumber, fComment, fCreator, fcreatetime) VALUES (#{name}, #{number}, #{comment}, #{creator}, #{createTime})
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
 
     <select id="getById" resultType="com.q.ai.mvc.dao.po.Intent">
         select * from intent where id=#{id}

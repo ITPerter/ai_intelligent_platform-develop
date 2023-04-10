@@ -38,4 +38,36 @@ public interface WordSlotDao {
      * @return
      */
     List<WordSlot> getWordSlotByIntentionId(@Param("id") Long id);
+
+    /**
+     * 我把意图id集获取词槽列表
+     * @param intentionIds
+     * @return
+     */
+    List<WordSlot> getWordSlotByIntentionIds(List<Long> intentionIds);
+
+    /**
+     * 通过意图编码获取词槽信息
+     * @param number
+     * @return
+     */
+    List<WordSlot> getSlotByNumber(String number);
+
+    /**
+     * 通过id获取词槽信息
+     * @param id
+     * @return
+     */
+    WordSlot getWordSlotById(Long id);
+
+    /**
+     * 更新词槽信息
+     * @param wordSlot
+     * @return
+     */
+    int updateSlot(WordSlot wordSlot);
+
+    int addSlot(WordSlot wordSlot);
+
+    int deleteSlot(List<Long> ids);
 }

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * 技能列表实体类
  */
-public class TSkill {
+public class TSkill extends SkillIntention {
     private Long id;
     private int version;
     private String number;
@@ -14,7 +14,7 @@ public class TSkill {
     private String description;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-    private Long creatorId;
+    private int creatorId;
     private Long prodLineId;
     private int status;
     private Long initInterface;
@@ -113,11 +113,11 @@ public class TSkill {
         return this;
     }
 
-    public Long getCreatorId() {
+    public int getCreatorId() {
         return creatorId;
     }
 
-    public TSkill setCreatorId(Long creatorId) {
+    public TSkill setCreatorId(int creatorId) {
         this.creatorId = creatorId;
         return this;
     }

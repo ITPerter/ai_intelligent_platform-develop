@@ -10,8 +10,10 @@ import com.q.ai.component.io.Page;
 import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
 import com.q.ai.component.io.RsException;
+import com.q.ai.mvc.dao.po.Intention;
 import com.q.ai.mvc.service.IntentService;
 import com.q.ai.mvc.service.RobotService;
+import com.q.ai.mvc.service.SkillIntentionSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +30,33 @@ public class IntentController {
     private IntentService intentService;
     @Autowired
     private RobotService robotService;
+    @Autowired
+    private SkillIntentionSlotService skillIntentionSlotService;
 
+    /**
+     * 添加意图
+     * @param param     意图信息
+     * @param skillId   任务技能id
+     * @return
+     */
+    @PutMapping("/addIntention")
+    public Rs addIntention(@RequestBody ParamJSON param,@RequestParam("skillId") int skillId) {
+        Intention intention = param.toJavaObject(Intention.class);
+        System.out.println(skillId);
+        Long id;
+        int i;
+        try {
+            id = intentService.addIntention(intention);
+            i = skillIntentionSlotService.addSkillIntention(id, skillId);
+        }catch (Exception e){
+            return Rs.buildErr(e);
+        }
+        List<Long> ids = new ArrayList<>();
+        ids.add(id);
+        ids.add((long) i);
+        // 这里添加一个技能意图关系业务
+        return Rs.buildData(ids,"添加成功");
+    }
 
     @GetMapping("/getById")
     public Rs getById(@RequestParam int id) {
@@ -38,7 +66,6 @@ public class IntentController {
         }
         return Rs.buildErr("意图不存在");
     }
-
 
     /**
      * 获取意图列表数据
@@ -107,6 +134,4 @@ public class IntentController {
         intentService.delByIdList(idList);
         return Rs.buildOK("删除成功");
     }
-
-
 }

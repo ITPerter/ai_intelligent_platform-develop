@@ -112,16 +112,11 @@ public class BaseDataValueService {
                 if (null == time) {
                     return false;
                 }
-
             case TEXT:
-
                 break;
             default:
-
-
         }
         return true;
-
     }
 
 
@@ -132,5 +127,4 @@ public class BaseDataValueService {
     public int delByBaseDataNumber(List<String> baseDataNumberList) {
         return baseDataValueDao.delByBaseDataNumberList(baseDataNumberList);
     }
-
 }

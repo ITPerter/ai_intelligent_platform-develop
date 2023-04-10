@@ -25,7 +25,7 @@
         <result property="number" column="FNumber"/>
         <result property="type" column="FType"/>
         <result property="description" column="FDesc"/>
-        <result property="creatorTime" column="FCreatorTime"/>
+        <result property="createTime" column="FCreateTime"/>
         <result property="updateTime" column="FUpdateTime"/>
         <result property="creatorId" column="FCreatorId"/>
         <result property="prodLineId" column="FProdLineID"/>
@@ -35,8 +35,70 @@
         <result property="enabledTaskFlow" column="FEnabledTaskFlow"/>
     </resultMap>
 
-    <select id="getTaskById" resultType="com.q.ai.mvc.dao.po.TSkill">
+    <insert id="addQuestionAnsweringSkill" parameterType="com.q.ai.mvc.dao.po.TSkill">
+        INSERT INTO t_skill(FVersion, FNumber, FName, FDesc, FCreateTime, FCreatorId, FType)
+        VALUES(#{version}, #{number}, #{name}, #{description}, #{createTime}, #{creatorId}, 20)
+    </insert>
+
+    <select id="getQuestionAnsweringSkills" resultMap="tSkill">
+        select * from t_skill where FType=20 limit #{offset},#{limit};
+    </select>
+
+    <insert id="insertTaskSkill" parameterType="com.q.ai.mvc.dao.po.TSkill">
+        INSERT INTO t_skill(FVersion, FNumber, FName, FDesc, FCreateTime, FCreatorId, FType)
+        VALUES(#{version}, #{number}, #{name}, #{description}, #{createTime}, #{creatorId}, 10)
+    </insert>
+
+    <delete id="deleteQuestionAnsweringSkills" parameterType="list" >
+        delete from t_skill where FID in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteTaskById" parameterType="list" >
+        delete from t_skill where FID in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateQuestionAnsweringSkill" parameterType="com.q.ai.mvc.dao.po.TSkill">
+        update t_skill
+        <set>
+            <if test="version!=null">FVersion=#{version},</if>
+            <if test="number!=null">FNumber=#{number},</if>
+            <if test="name!=null">FName=#{name},</if>
+            <if test="description!=null">FDesc=#{description},</if>
+            <if test="updateTime!=null">FUpdateTime=#{updateTime},</if>
+            <if test="creatorId!=null">FCreatorId=#{creatorId},</if>
+        </set>
+        where FID=#{id}
+    </update>
+
+    <update id="updateTaskById" parameterType="com.q.ai.mvc.dao.po.TSkill">
+        update t_skill
+        <set>
+            <if test="version!=null">FVersion=#{version},</if>
+            <if test="number!=null">FNumber=#{number},</if>
+            <if test="name!=null">FName=#{name},</if>
+            <if test="description!=null">FDesc=#{description},</if>
+            <if test="updateTime!=null">FUpdateTime=#{updateTime},</if>
+            <if test="creatorId!=null">FCreatorId=#{creatorId},</if>
+        </set>
+        where FID=#{id}
+    </update>
+
+    <select id="getTaskById" resultMap="tSkill">
         select * from t_skill where FID=#{id} and FType=10;
+    </select>
+
+    <select id="getTaskByNumber" resultMap="tSkill">
+        select * from t_skill where FNumber=#{number} and FType=10;
+    </select>
+
+    <select id="getSkillId" resultType="Long">
+        select FID from t_skill where FNumber=#{number} and FType=10;
     </select>
 
     <select id="getTaskList" resultMap="tSkill">
@@ -44,7 +106,11 @@
     </select>
 
     <select id="getTaskCount" resultType="int">
-        select count(*) from t_skill;
+        select count(*) from t_skill where FType=10;
+    </select>
+
+    <select id="getQuestionAnsweringCount" resultType="int">
+        select count(*) from t_skill where FType=20;
     </select>
 
     <select id="getTaskListByName" resultMap="tSkill">

@@ -16,8 +16,6 @@ public class Robot2Intent {
     public Robot2Intent() {
     }
 
-
-
     public int getId() {
         return id;
     }

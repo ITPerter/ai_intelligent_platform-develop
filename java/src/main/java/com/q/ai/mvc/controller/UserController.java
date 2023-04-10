@@ -45,6 +45,8 @@ public class UserController {
     @ResponseBody
     @Auth(AUTH_TYPE.OFF)
     public Rs login(@RequestBody ParamJSON param) {
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println(param);
         String userName = param.getMustString("userName");
         String password = param.getMustString("password");
         Integer userId = param.getInteger("userId");
@@ -66,11 +68,9 @@ public class UserController {
     @GetMapping(value = "/logout")
     @Auth(AUTH_TYPE.OFF)
     public Rs logout() {
-
         userService.logout(requestContext.getSession());
         return Rs.buildOK("退出登录成功");
 
     }
-
 
 }

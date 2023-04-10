@@ -201,5 +201,39 @@ public class WordSlotService {
         return wordSlotDao.delByIdList(idList);
     }
 
+    /**
+     * 通过意图id列表获取词槽数据
+     * @param intentionIds
+     * @return
+     */
+    public List<WordSlot> getWordSlotByIntentionIds(List<Long> intentionIds) {
+        return wordSlotDao.getWordSlotByIntentionIds(intentionIds);
+    }
 
+    public List<WordSlot> getSlotByNumber(String number) {
+        return wordSlotDao.getSlotByNumber(number);
+    }
+
+    public WordSlot getWordSlotById(Long id) {
+        return wordSlotDao.getWordSlotById(id);
+    }
+
+    public int updateSlot(WordSlot wordSlot) {
+        wordSlot.setUpdateTime(LocalDateTime.now());
+        return wordSlotDao.updateSlot(wordSlot);
+    }
+
+    public int addSlot(WordSlot wordSlot) {
+        long min = 100000000L; // 最小值为100000000
+        long max = 999999999L; // 最大值为999999999
+        // 为关系随机生成一个id
+        long FID = (long)(Math.random() * (max - min + 1)) + min;
+        wordSlot.setId(FID);
+        wordSlot.setCreateTime(LocalDateTime.now());
+        return wordSlotDao.addSlot(wordSlot);
+    }
+
+    public int deleteSlot(List<Long> ids) {
+        return wordSlotDao.deleteSlot(ids);
+    }
 }

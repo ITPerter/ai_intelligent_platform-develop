@@ -1,9 +1,6 @@
 package com.q.ai.mvc.dao.po;
 
-
-
 import java.time.LocalDateTime;
-
 
 public class Intent2Slot {
 

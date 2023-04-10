@@ -2,11 +2,11 @@ package com.q.ai.mvc.service;
 
 import com.q.ai.component.session.RequestContext;
 import com.q.ai.mvc.dao.po.Intent;
+import com.q.ai.mvc.dao.po.Intention;
 import com.q.ai.mvc.dao.po.Robot2Intent;
 import com.q.ai.component.io.Page;
 import com.q.ai.mvc.dao.IntentDao;
 import com.q.ai.mvc.dao.Robot2IntentDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -131,4 +131,15 @@ public class IntentService {
         return intentDao.delByIdList(idList);
     }
 
+    /**
+     *
+     * @param intention
+     * @return  返回添加的意图的id
+     */
+    public Long addIntention(Intention intention) {
+        intention.setCreateTime(LocalDateTime.now());
+        intention.setCreator(requestContext.getSession().getUserId());
+        intentDao.addIntention(intention);
+        return intention.getId();
+    }
 }

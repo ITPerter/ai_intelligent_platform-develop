@@ -1,6 +1,7 @@
 package com.q.ai.mvc.dao.po;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 任务型技能意图表
@@ -15,16 +16,26 @@ public class Intention {
      * 2：已训练
      */
     private int starts;
-    private Timestamp createTime;
+    private LocalDateTime createTime;
     private int isConfirm;
     private String confirmTemplate;
     private Long parentId;
     private String type;
     private String comment;
-    private Long creator;
+    private int creator;
     private int isShowCard;
     private String cardType;
     private int autoReply;
+
+    public List<String> getSlotList() {
+        return slotList;
+    }
+    public Intention setSlotList(List<String> slotList) {
+        this.slotList = slotList;
+        return this;
+    }
+    // 意图对应词槽列表
+    private List<String> slotList;
 
     @Override
     public String toString() {
@@ -82,11 +93,11 @@ public class Intention {
         return this;
     }
 
-    public Timestamp getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public Intention setCreateTime(Timestamp createTime) {
+    public Intention setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
         return this;
     }
@@ -136,11 +147,11 @@ public class Intention {
         return this;
     }
 
-    public Long getCreator() {
+    public int getCreator() {
         return creator;
     }
 
-    public Intention setCreator(Long creator) {
+    public Intention setCreator(int creator) {
         this.creator = creator;
         return this;
     }

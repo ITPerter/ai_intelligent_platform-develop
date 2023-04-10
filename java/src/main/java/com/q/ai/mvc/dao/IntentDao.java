@@ -1,6 +1,7 @@
 package com.q.ai.mvc.dao;
 
 import com.q.ai.mvc.dao.po.Intent;
+import com.q.ai.mvc.dao.po.Intention;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -79,4 +80,11 @@ public interface IntentDao {
      * @return
      */
     int delByRobotId(@Param("id") int robotId);
+
+    /**
+     * 添加意图
+     * @param intention
+     * @return
+     */
+    int addIntention(Intention intention);
 }
