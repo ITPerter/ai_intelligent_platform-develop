@@ -40,7 +40,10 @@ public class NlpService {
         bodyMap.put("bot_id", robotId);
         bodyMap.put("msgtype", "train_bot");
         bodyMap.put("track_id", MDC.get(RequestContext.TRACK_ID));
-        postNlp(bodyMap);
+        JSONObject nlp = postNlp(bodyMap);
+        System.out.println("----------------------------------------------\n"
+                            +nlp.toJSONString()+
+                            "-----------------------------------------------");
         return true;
     }
 

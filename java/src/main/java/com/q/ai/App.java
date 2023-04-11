@@ -1,4 +1,4 @@
- package com.q.ai;
+package com.q.ai;
 
 
 import com.q.ai.component.config.bean.DataSourceBean;
@@ -25,7 +25,6 @@ public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
-
 
         OS.print("开始启动"+OS.getThread().getName());
 

@@ -29,7 +29,6 @@ public class RobotController {
     @Autowired
     private NlpService nlpService;
 
-
     @ApiOperation(value = "获取机器人id", httpMethod = "GET")
     @ApiResponses(
             @ApiResponse(code = 200, message = "return",
@@ -54,7 +53,6 @@ public class RobotController {
         page = robotService.getPage(page);
         return Rs.buildList(robots, page);
     }
-
 
     @RequestMapping(value = "/save", produces = "application/json;charset=UTF-8")
     @ResponseBody

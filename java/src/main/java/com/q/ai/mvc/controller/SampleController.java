@@ -41,7 +41,6 @@ public class SampleController {
         Page page = new Page(number, size);
         List<Sample> sampleList = sampleService.getListByIntentId(intentId, page);
         Map<Integer, List<SampleItem>> sampleId2SampleSlotMap = sampleService.getSampleItemListBySampleList(sampleList);
-
         Map<String, Object> rsMap = new HashMap<>();
         rsMap.put("sampleList", sampleList);
         rsMap.put("sampleListPage", page);
@@ -61,7 +60,6 @@ public class SampleController {
     public Rs getListByIntentId(@RequestParam int intentId, @RequestParam int number, @RequestParam int size) {
         Page page = new Page(number, size);
         List<SampleVo> sampleVoList = sampleService.getVoListByIntentId(intentId, page);
-
         return Rs.buildList(sampleVoList, page);
     }
 

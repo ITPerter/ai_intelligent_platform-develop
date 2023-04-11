@@ -66,13 +66,11 @@ public class ThirdController {
     @ResponseBody
 //    @Auth(AUTH_TYPE.USER_TOKEN)
     public Rs chat(@RequestBody ParamJSON param) {
-
         int robotId = param.getMustInteger("robotId");
         String chatMsg = param.getMustString("chatMsg");
         if (StringUtils.isEmpty(chatMsg)) {
             throw new RsException("说点啥吧？");
         }
-
         Object object = robotService.chat(robotId, chatMsg);
         return Rs.buildData(object);
     }
@@ -91,7 +89,6 @@ public class ThirdController {
     @ResponseBody
 //    @Auth(AUTH_TYPE.USER_TOKEN)
     public Rs chat_v2(@RequestBody ParamJSON param) {
-
         int robotId = param.getMustInteger("robotId");
         String chatMsg = param.getMustString("chatMsg");
         String userId = param.getMustString("userId");
