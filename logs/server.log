@@ -18816,3 +18816,162 @@ org.springframework.web.bind.MissingServletRequestParameterException: Required S
 10:05:22.270 [Thread-20] [0] INFO  c.z.h.HikariDataSource 350 - HikariPool-1 - Shutdown initiated...
 10:05:22.276 [Thread-20] [0] INFO  c.z.h.HikariDataSource 352 - HikariPool-1 - Shutdown completed.
 10:05:22.276 [Thread-20] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$ed3c7b3c 67 - todo:断开Mysql
+22:08:40.421 [restartedMain] [0] INFO  com.q.ai.App 50 - Starting App on LAPTOP-KG102MKP with PID 72976 (G:\projects2\work2\ai_intelligent_platform-develop\java\build\classes\java\main started by HQW in G:\projects2\work2\ai_intelligent_platform-develop)
+22:08:40.524 [restartedMain] [0] INFO  com.q.ai.App 679 - The following profiles are active: beijing
+22:08:40.591 [restartedMain] [0] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor 227 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+22:08:41.880 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 90 - Tomcat initialized with port(s): 8021 (http)
+22:08:41.893 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8021"]
+22:08:41.901 [restartedMain] [0] INFO  o.a.c.c.StandardService 173 - Starting service [Tomcat]
+22:08:41.901 [restartedMain] [0] INFO  o.a.c.c.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+22:08:41.906 [restartedMain] [0] INFO  o.a.c.c.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\JDK 8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\虚拟机\VMware 16\bin\;C:;Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\JDK 8\bin;D:\maven\maven-3.5.4\maven-3.5.4\bin;D:\压缩软件\Bandzip\Bandizip\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\gradle\gradle-7.1-bin\gradle-7.1\bin;%NODE_PATH%;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\servlet-api.jar;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\jsp-api.jar;D:\JDK\jdk 11\bin;D:\MongoDB\bin;D:\node;D:\node\node_global;D:\工具软件类\WeChatTool\微信web开发者工具\dll;D:\Git\cmd;D:\idea 2020\spring-2.7.3\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts;D:\JDK\jdk17\bin;F:\VM\hadoop3.x\hadooop_win\hadoop-3.1.0\bin;D:\tools\matlab\runtime\win64;D:\tools\matlab\bin;D:\a_tool3\ffmpeg\ffmpeg-5.1.2-essentials_build\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HQW\AppData\Local\Programs\Python\Python39\;C:\Users\HQW\AppData\Local\Microsoft\WindowsApps;D:\node\node_modules\npm;D:\tools\IDEA\2022.1.4\IntelliJ IDEA 2022.1.4\bin;;C:\Users\HQW\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.9;;D:\python\PyCharm 2021.3.3\bin;;D:\python\PyCharm Community Edition 2021.1.3\bin;;D:\tools\VS\Microsoft VS Code\bin;.]
+22:08:42.026 [restartedMain] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring embedded WebApplicationContext
+22:08:42.026 [restartedMain] [0] INFO  o.s.w.c.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1435 ms
+22:08:42.060 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$521233b3 28 - 注入bean:DataSource(for mybatis).
+22:08:42.105 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$521233b3 45 - 注入bean:SqlSessionFactory(for mybatis).
+22:08:42.344 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$521233b3 61 - 注入bean:SqlSessionTemplate(for mybatis).
+22:08:42.394 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 45 - ES服务未启用,修改配置: elasticsearch.enable 为true可启用ES.
+22:08:42.404 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 67 - 注入bean:HighLevelClient
+22:08:43.580 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+22:08:43.911 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 171 - Initializing ExecutorService 'taskScheduler'
+22:08:44.005 [restartedMain] [0] INFO  o.s.b.d.a.OptionalLiveReloadServer 57 - LiveReload server is running on port 35729
+22:08:44.035 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8021"]
+22:08:44.047 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 204 - Tomcat started on port(s): 8021 (http) with context path ''
+22:08:44.049 [restartedMain] [0] INFO  com.q.ai.App 59 - Started App in 3.977 seconds (JVM running for 4.911)
+22:09:02.984 [Thread-16] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 208 - Shutting down ExecutorService 'taskScheduler'
+22:09:02.986 [Thread-16] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+22:09:02.989 [Thread-16] [0] INFO  c.q.a.c.c.EsHighLevelConfig 73 - todo:断开ES
+22:09:02.989 [Thread-16] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$521233b3 67 - todo:断开Mysql
+22:09:07.533 [restartedMain] [0] INFO  com.q.ai.App 50 - Starting App on LAPTOP-KG102MKP with PID 68340 (G:\projects2\work2\ai_intelligent_platform-develop\java\build\classes\java\main started by HQW in G:\projects2\work2\ai_intelligent_platform-develop)
+22:09:07.535 [restartedMain] [0] INFO  com.q.ai.App 679 - The following profiles are active: beijing
+22:09:07.568 [restartedMain] [0] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor 227 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+22:09:08.744 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 90 - Tomcat initialized with port(s): 8021 (http)
+22:09:08.754 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8021"]
+22:09:08.760 [restartedMain] [0] INFO  o.a.c.c.StandardService 173 - Starting service [Tomcat]
+22:09:08.761 [restartedMain] [0] INFO  o.a.c.c.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+22:09:08.766 [restartedMain] [0] INFO  o.a.c.c.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\JDK 8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\虚拟机\VMware 16\bin\;C:;Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\JDK 8\bin;D:\maven\maven-3.5.4\maven-3.5.4\bin;D:\压缩软件\Bandzip\Bandizip\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\gradle\gradle-7.1-bin\gradle-7.1\bin;%NODE_PATH%;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\servlet-api.jar;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\jsp-api.jar;D:\JDK\jdk 11\bin;D:\MongoDB\bin;D:\node;D:\node\node_global;D:\工具软件类\WeChatTool\微信web开发者工具\dll;D:\Git\cmd;D:\idea 2020\spring-2.7.3\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts;D:\JDK\jdk17\bin;F:\VM\hadoop3.x\hadooop_win\hadoop-3.1.0\bin;D:\tools\matlab\runtime\win64;D:\tools\matlab\bin;D:\a_tool3\ffmpeg\ffmpeg-5.1.2-essentials_build\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HQW\AppData\Local\Programs\Python\Python39\;C:\Users\HQW\AppData\Local\Microsoft\WindowsApps;D:\node\node_modules\npm;D:\tools\IDEA\2022.1.4\IntelliJ IDEA 2022.1.4\bin;;C:\Users\HQW\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.9;;D:\python\PyCharm 2021.3.3\bin;;D:\python\PyCharm Community Edition 2021.1.3\bin;;D:\tools\VS\Microsoft VS Code\bin;.]
+22:09:08.886 [restartedMain] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring embedded WebApplicationContext
+22:09:08.886 [restartedMain] [0] INFO  o.s.w.c.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1318 ms
+22:09:08.920 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$d0347ddb 28 - 注入bean:DataSource(for mybatis).
+22:09:08.961 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$d0347ddb 45 - 注入bean:SqlSessionFactory(for mybatis).
+22:09:09.178 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$d0347ddb 61 - 注入bean:SqlSessionTemplate(for mybatis).
+22:09:09.231 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 45 - ES服务未启用,修改配置: elasticsearch.enable 为true可启用ES.
+22:09:09.238 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 67 - 注入bean:HighLevelClient
+22:09:10.292 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+22:09:10.609 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 171 - Initializing ExecutorService 'taskScheduler'
+22:09:10.710 [restartedMain] [0] INFO  o.s.b.d.a.OptionalLiveReloadServer 57 - LiveReload server is running on port 35729
+22:09:10.741 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8021"]
+22:09:10.753 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 204 - Tomcat started on port(s): 8021 (http) with context path ''
+22:09:10.755 [restartedMain] [0] INFO  com.q.ai.App 59 - Started App in 3.505 seconds (JVM running for 4.381)
+22:09:55.653 [http-nio-8021-exec-1] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:09:55.653 [http-nio-8021-exec-1] [0] INFO  o.s.w.s.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+22:09:55.664 [http-nio-8021-exec-1] [0] INFO  o.s.w.s.DispatcherServlet 546 - Completed initialization in 11 ms
+22:09:55.685 [http-nio-8021-exec-1] [0] INFO  c.z.h.HikariDataSource 110 - HikariPool-1 - Starting...
+22:09:55.878 [http-nio-8021-exec-1] [0] INFO  c.z.h.HikariDataSource 123 - HikariPool-1 - Start completed.
+22:09:55.883 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - ==>  Preparing: select * from session where id=?
+22:09:55.900 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - ==> Parameters: C93AE2474AFBEB15F782A4F500761451(String)
+22:09:55.917 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - <==      Total: 0
+22:09:55.923 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - ==>  Preparing: insert into session( id, content, createTime ) values( ?, ?, ? )
+22:09:55.925 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - ==> Parameters: C93AE2474AFBEB15F782A4F500761451(String), null, 2023-04-12T22:09:55.922(LocalDateTime)
+22:09:55.938 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - <==    Updates: 1
+22:09:56.013 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==>  Preparing: update session SET content=? where id=?;
+22:09:56.014 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==> Parameters: {"chatState":"NO_INTENT","id":"C93AE2474AFBEB15F782A4F500761451","userId":0}(String), C93AE2474AFBEB15F782A4F500761451(String)
+22:09:56.017 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - <==    Updates: 1
+22:09:56.036 [http-nio-8021-exec-1] [1681308596018] INFO  c.q.a.m.c.TRobotController 47 - 请求入参:GET /tRobot/getRobotByLIke [出差]
+22:09:56.039 [http-nio-8021-exec-1] [1681308596018] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - ==>  Preparing: SELECT * FROM t_robot WHERE FName LIKE ?;
+22:09:56.039 [http-nio-8021-exec-1] [1681308596018] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - ==> Parameters: %出差%(String)
+22:09:56.044 [http-nio-8021-exec-1] [1681308596018] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - <==      Total: 1
+22:09:56.053 [http-nio-8021-exec-1] [1681308596018] INFO  c.q.a.m.c.TRobotController 76 - 请求返回(27 ms):{"msg":"成功","code":0,"data":[{"creatorId":0,"description":"演示","updateTime":"2023-03-27T20:51:55","version":1,"number":"1","createTime":"2023-03-27T20:51:52","name":"出差申请-动前三思","id":10,"train":1}],"trackId":"1681308596018"}
+22:09:56.055 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==>  Preparing: update session SET content=? where id=?;
+22:09:56.055 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==> Parameters: {"chatState":"NO_INTENT","id":"C93AE2474AFBEB15F782A4F500761451","userId":0}(String), C93AE2474AFBEB15F782A4F500761451(String)
+22:09:56.057 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - <==    Updates: 1
+22:41:39.150 [Thread-15] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 208 - Shutting down ExecutorService 'taskScheduler'
+22:41:39.152 [Thread-15] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+22:41:39.154 [Thread-15] [0] INFO  c.q.a.c.c.EsHighLevelConfig 73 - todo:断开ES
+22:41:39.154 [Thread-15] [0] INFO  c.z.h.HikariDataSource 350 - HikariPool-1 - Shutdown initiated...
+22:41:39.165 [Thread-15] [0] INFO  c.z.h.HikariDataSource 352 - HikariPool-1 - Shutdown completed.
+22:41:39.165 [Thread-15] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$d0347ddb 67 - todo:断开Mysql
+22:41:44.322 [restartedMain] [0] INFO  com.q.ai.App 50 - Starting App on LAPTOP-KG102MKP with PID 84896 (G:\projects2\work2\ai_intelligent_platform-develop\java\build\classes\java\main started by HQW in G:\projects2\work2\ai_intelligent_platform-develop)
+22:41:44.325 [restartedMain] [0] INFO  com.q.ai.App 679 - The following profiles are active: beijing
+22:41:44.459 [restartedMain] [0] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor 227 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+22:41:45.902 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 90 - Tomcat initialized with port(s): 8021 (http)
+22:41:45.914 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8021"]
+22:41:45.921 [restartedMain] [0] INFO  o.a.c.c.StandardService 173 - Starting service [Tomcat]
+22:41:45.921 [restartedMain] [0] INFO  o.a.c.c.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+22:41:45.926 [restartedMain] [0] INFO  o.a.c.c.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\JDK 8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\虚拟机\VMware 16\bin\;C:;Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\JDK 8\bin;D:\maven\maven-3.5.4\maven-3.5.4\bin;D:\压缩软件\Bandzip\Bandizip\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\gradle\gradle-7.1-bin\gradle-7.1\bin;%NODE_PATH%;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\servlet-api.jar;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\jsp-api.jar;D:\JDK\jdk 11\bin;D:\MongoDB\bin;D:\node;D:\node\node_global;D:\工具软件类\WeChatTool\微信web开发者工具\dll;D:\Git\cmd;D:\idea 2020\spring-2.7.3\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts;D:\JDK\jdk17\bin;F:\VM\hadoop3.x\hadooop_win\hadoop-3.1.0\bin;D:\tools\matlab\runtime\win64;D:\tools\matlab\bin;D:\a_tool3\ffmpeg\ffmpeg-5.1.2-essentials_build\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HQW\AppData\Local\Programs\Python\Python39\;C:\Users\HQW\AppData\Local\Microsoft\WindowsApps;D:\node\node_modules\npm;D:\tools\IDEA\2022.1.4\IntelliJ IDEA 2022.1.4\bin;;C:\Users\HQW\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.9;;D:\python\PyCharm 2021.3.3\bin;;D:\python\PyCharm Community Edition 2021.1.3\bin;;D:\tools\VS\Microsoft VS Code\bin;.]
+22:41:46.058 [restartedMain] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring embedded WebApplicationContext
+22:41:46.058 [restartedMain] [0] INFO  o.s.w.c.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1599 ms
+22:41:46.082 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$f67cf6a 28 - 注入bean:DataSource(for mybatis).
+22:41:46.124 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$f67cf6a 45 - 注入bean:SqlSessionFactory(for mybatis).
+22:41:46.377 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$f67cf6a 61 - 注入bean:SqlSessionTemplate(for mybatis).
+22:41:46.432 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 45 - ES服务未启用,修改配置: elasticsearch.enable 为true可启用ES.
+22:41:46.439 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 67 - 注入bean:HighLevelClient
+22:41:47.579 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+22:41:47.898 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 171 - Initializing ExecutorService 'taskScheduler'
+22:41:48.000 [restartedMain] [0] INFO  o.s.b.d.a.OptionalLiveReloadServer 57 - LiveReload server is running on port 35729
+22:41:48.032 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8021"]
+22:41:48.044 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 204 - Tomcat started on port(s): 8021 (http) with context path ''
+22:41:48.046 [restartedMain] [0] INFO  com.q.ai.App 59 - Started App in 4.071 seconds (JVM running for 5.108)
+22:42:43.216 [Thread-17] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 208 - Shutting down ExecutorService 'taskScheduler'
+22:42:43.222 [Thread-17] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+22:42:43.224 [Thread-17] [0] INFO  c.q.a.c.c.EsHighLevelConfig 73 - todo:断开ES
+22:42:43.225 [Thread-17] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$f67cf6a 67 - todo:断开Mysql
+22:42:47.696 [restartedMain] [0] INFO  com.q.ai.App 50 - Starting App on LAPTOP-KG102MKP with PID 78272 (G:\projects2\work2\ai_intelligent_platform-develop\java\build\classes\java\main started by HQW in G:\projects2\work2\ai_intelligent_platform-develop)
+22:42:47.698 [restartedMain] [0] INFO  com.q.ai.App 679 - The following profiles are active: beijing
+22:42:47.733 [restartedMain] [0] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor 227 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+22:42:48.986 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 90 - Tomcat initialized with port(s): 8021 (http)
+22:42:48.998 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8021"]
+22:42:49.004 [restartedMain] [0] INFO  o.a.c.c.StandardService 173 - Starting service [Tomcat]
+22:42:49.005 [restartedMain] [0] INFO  o.a.c.c.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+22:42:49.010 [restartedMain] [0] INFO  o.a.c.c.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\JDK 8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\虚拟机\VMware 16\bin\;C:;Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\JDK 8\bin;D:\maven\maven-3.5.4\maven-3.5.4\bin;D:\压缩软件\Bandzip\Bandizip\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\gradle\gradle-7.1-bin\gradle-7.1\bin;%NODE_PATH%;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\servlet-api.jar;D:\tomcat\apache-tomcat-9.0.63\apache-tomcat-9.0.63\lib\jsp-api.jar;D:\JDK\jdk 11\bin;D:\MongoDB\bin;D:\node;D:\node\node_global;D:\工具软件类\WeChatTool\微信web开发者工具\dll;D:\Git\cmd;D:\idea 2020\spring-2.7.3\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts;D:\JDK\jdk17\bin;F:\VM\hadoop3.x\hadooop_win\hadoop-3.1.0\bin;D:\tools\matlab\runtime\win64;D:\tools\matlab\bin;D:\a_tool3\ffmpeg\ffmpeg-5.1.2-essentials_build\bin;C:\Users\HQW\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HQW\AppData\Local\Programs\Python\Python39\;C:\Users\HQW\AppData\Local\Microsoft\WindowsApps;D:\node\node_modules\npm;D:\tools\IDEA\2022.1.4\IntelliJ IDEA 2022.1.4\bin;;C:\Users\HQW\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.9;;D:\python\PyCharm 2021.3.3\bin;;D:\python\PyCharm Community Edition 2021.1.3\bin;;D:\tools\VS\Microsoft VS Code\bin;.]
+22:42:49.126 [restartedMain] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring embedded WebApplicationContext
+22:42:49.126 [restartedMain] [0] INFO  o.s.w.c.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1392 ms
+22:42:49.151 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$7c0aa8bb 28 - 注入bean:DataSource(for mybatis).
+22:42:49.197 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$7c0aa8bb 45 - 注入bean:SqlSessionFactory(for mybatis).
+22:42:49.450 [restartedMain] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$7c0aa8bb 61 - 注入bean:SqlSessionTemplate(for mybatis).
+22:42:49.506 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 45 - ES服务未启用,修改配置: elasticsearch.enable 为true可启用ES.
+22:42:49.514 [restartedMain] [0] INFO  c.q.a.c.c.EsHighLevelConfig 67 - 注入bean:HighLevelClient
+22:42:50.632 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+22:42:50.939 [restartedMain] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 171 - Initializing ExecutorService 'taskScheduler'
+22:42:51.024 [restartedMain] [0] INFO  o.s.b.d.a.OptionalLiveReloadServer 57 - LiveReload server is running on port 35729
+22:42:51.052 [restartedMain] [0] INFO  o.a.c.h.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8021"]
+22:42:51.064 [restartedMain] [0] INFO  o.s.b.w.e.t.TomcatWebServer 204 - Tomcat started on port(s): 8021 (http) with context path ''
+22:42:51.066 [restartedMain] [0] INFO  com.q.ai.App 59 - Started App in 3.661 seconds (JVM running for 4.578)
+22:43:04.423 [http-nio-8021-exec-1] [0] INFO  o.a.c.c.C.[.[.[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:43:04.423 [http-nio-8021-exec-1] [0] INFO  o.s.w.s.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+22:43:04.441 [http-nio-8021-exec-1] [0] INFO  o.s.w.s.DispatcherServlet 546 - Completed initialization in 17 ms
+22:43:04.464 [http-nio-8021-exec-1] [0] INFO  c.z.h.HikariDataSource 110 - HikariPool-1 - Starting...
+22:43:04.638 [http-nio-8021-exec-1] [0] INFO  c.z.h.HikariDataSource 123 - HikariPool-1 - Start completed.
+22:43:04.644 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - ==>  Preparing: select * from session where id=?
+22:43:04.660 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - ==> Parameters: C9F43E521961C90F9F8D0907D2A689B2(String)
+22:43:04.681 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.getById 137 - <==      Total: 0
+22:43:04.688 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - ==>  Preparing: insert into session( id, content, createTime ) values( ?, ?, ? )
+22:43:04.692 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - ==> Parameters: C9F43E521961C90F9F8D0907D2A689B2(String), null, 2023-04-12T22:43:04.687(LocalDateTime)
+22:43:04.695 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.insert 137 - <==    Updates: 1
+22:43:04.769 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==>  Preparing: update session SET content=? where id=?;
+22:43:04.770 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==> Parameters: {"chatState":"NO_INTENT","id":"C9F43E521961C90F9F8D0907D2A689B2","userId":0}(String), C9F43E521961C90F9F8D0907D2A689B2(String)
+22:43:04.772 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - <==    Updates: 1
+22:43:04.791 [http-nio-8021-exec-1] [1681310584772] INFO  c.q.a.m.c.TRobotSkillController 47 - 请求入参:GET /robotSkill/getIntentionByRobotId [16]
+22:43:04.793 [http-nio-8021-exec-1] [1681310584772] DEBUG c.q.a.m.d.T.getSkillByRobotId 137 - ==>  Preparing: SELECT ts.* FROM t_skill ts INNER JOIN t_robotskill trs ON ts.FID = trs.FSkillID WHERE trs.FRobotID = ?;
+22:43:04.794 [http-nio-8021-exec-1] [1681310584772] DEBUG c.q.a.m.d.T.getSkillByRobotId 137 - ==> Parameters: 16(Long)
+22:43:04.803 [http-nio-8021-exec-1] [1681310584772] DEBUG c.q.a.m.d.T.getSkillByRobotId 137 - <==      Total: 4
+22:43:04.813 [http-nio-8021-exec-1] [1681310584772] INFO  c.q.a.m.c.TRobotSkillController 76 - 请求返回(32 ms):{"msg":"查询成功","code":0,"data":[{"creatorId":0,"description":"通过语音下订单","updateTime":"2023-03-27T19:57:46","version":1,"number":"number02","createTime":"2023-03-27T19:57:41","name":"语音下订单","id":25,"train":0},{"creatorId":0,"description":"语音下单","updateTime":"2023-03-27T15:30:50","version":1,"number":"number01","createTime":"2023-03-27T15:28:17","name":"销售订单","id":12,"train":0},{"creatorId":100000,"description":"申请1","updateTime":"2023-03-27T19:59:56","version":1,"number":"number04","createTime":"2023-03-27T19:59:54","name":"出差申请1","id":27,"train":0},{"creatorId":100000,"description":"申请6","updateTime":"2023-03-27T20:01:06","version":1,"number":"BUS_TRIP6","createTime":"2023-03-27T20:01:03","name":"出差申请6","id":33,"train":0}],"trackId":"1681310584772"}
+22:43:04.816 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==>  Preparing: update session SET content=? where id=?;
+22:43:04.816 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - ==> Parameters: {"chatState":"NO_INTENT","id":"C9F43E521961C90F9F8D0907D2A689B2","userId":0}(String), C9F43E521961C90F9F8D0907D2A689B2(String)
+22:43:04.818 [http-nio-8021-exec-1] [0] DEBUG c.q.a.m.d.S.update 137 - <==    Updates: 1
+22:52:10.112 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.getById 137 - ==>  Preparing: select * from session where id=?
+22:52:10.113 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.getById 137 - ==> Parameters: C9F43E521961C90F9F8D0907D2A689B2(String)
+22:52:10.115 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.getById 137 - <==      Total: 1
+22:52:10.121 [http-nio-8021-exec-3] [1681311130120] INFO  c.q.a.m.c.TRobotController 47 - 请求入参:GET /tRobot/getRobotByLIke [出差]
+22:52:10.123 [http-nio-8021-exec-3] [1681311130120] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - ==>  Preparing: SELECT * FROM t_robot WHERE FName LIKE ?;
+22:52:10.123 [http-nio-8021-exec-3] [1681311130120] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - ==> Parameters: %出差%(String)
+22:52:10.127 [http-nio-8021-exec-3] [1681311130120] DEBUG c.q.a.m.d.T.getRobotByLIke 137 - <==      Total: 1
+22:52:10.128 [http-nio-8021-exec-3] [1681311130120] INFO  c.q.a.m.c.TRobotController 76 - 请求返回(8 ms):{"msg":"成功","code":0,"data":[{"creatorId":0,"description":"演示","updateTime":"2023-03-27T20:51:55","version":1,"number":"1","createTime":"2023-03-27T20:51:52","name":"出差申请-动前三思","id":10,"train":1}],"trackId":"1681311130120"}
+22:52:10.128 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.update 137 - ==>  Preparing: update session SET content=? where id=?;
+22:52:10.128 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.update 137 - ==> Parameters: {"chatState":"NO_INTENT","id":"C9F43E521961C90F9F8D0907D2A689B2","userId":0}(String), C9F43E521961C90F9F8D0907D2A689B2(String)
+22:52:10.130 [http-nio-8021-exec-3] [0] DEBUG c.q.a.m.d.S.update 137 - <==    Updates: 1
+22:52:53.774 [Thread-16] [0] INFO  o.s.s.c.ThreadPoolTaskScheduler 208 - Shutting down ExecutorService 'taskScheduler'
+22:52:53.776 [Thread-16] [0] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+22:52:53.778 [Thread-16] [0] INFO  c.q.a.c.c.EsHighLevelConfig 73 - todo:断开ES
+22:52:53.779 [Thread-16] [0] INFO  c.z.h.HikariDataSource 350 - HikariPool-1 - Shutdown initiated...
+22:52:53.784 [Thread-16] [0] INFO  c.z.h.HikariDataSource 352 - HikariPool-1 - Shutdown completed.
+22:52:53.784 [Thread-16] [0] INFO  c.q.a.c.c.MysqlConfig$$EnhancerBySpringCGLIB$$7c0aa8bb 67 - todo:断开Mysql

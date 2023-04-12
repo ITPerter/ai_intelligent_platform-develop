@@ -34,6 +34,14 @@
         <result property="train" column="FTrain"/>
     </resultMap>
 
+    <select id="getSkillByRobotId" resultMap="tRobot">
+        SELECT ts.* FROM t_skill ts INNER JOIN t_robotskill trs ON ts.FID = trs.FSkillID WHERE trs.FRobotID = #{id};
+    </select>
+
+    <select id="getRobotByLIke" resultMap="tRobot">
+        SELECT * FROM t_robot WHERE FName LIKE #{name};
+    </select>
+
     <delete id="deleteRobotIds" parameterType="list">
         delete from t_robot where FID in
         <foreach collection="list" item="id" open="(" close=")" separator=",">

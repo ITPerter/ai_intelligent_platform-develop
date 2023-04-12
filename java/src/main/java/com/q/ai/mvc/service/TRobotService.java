@@ -3,6 +3,7 @@ package com.q.ai.mvc.service;
 import com.q.ai.component.session.RequestContext;
 import com.q.ai.mvc.dao.TRobotDao;
 import com.q.ai.mvc.dao.po.TRobot;
+import com.q.ai.mvc.dao.po.TSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,14 @@ public class TRobotService {
 
     public int deleteRobotIds(List<Long> robotIdList) {
         return tRobotDao.deleteRobotIds(robotIdList);
+    }
+
+    public List<TRobot> getRobotByLIke(String name) {
+        name = "%" + name + "%";
+        return tRobotDao.getRobotByLIke(name);
+    }
+
+    public List<TSkill> getSkillByRobotId(Long id) {
+        return tRobotDao.getSkillByRobotId(id);
     }
 }

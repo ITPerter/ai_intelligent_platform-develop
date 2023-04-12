@@ -1,7 +1,7 @@
 package com.q.ai.mvc.dao;
 
-import com.q.ai.mvc.dao.po.Robot;
 import com.q.ai.mvc.dao.po.TRobot;
+import com.q.ai.mvc.dao.po.TSkill;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,4 +18,8 @@ public interface TRobotDao {
     int insertRobot(TRobot tRobot);
 
     int deleteRobotIds(List<Long> robotIdList);
+
+    List<TRobot> getRobotByLIke(String name);
+
+    List<TSkill> getSkillByRobotId(Long id);
 }

@@ -27,6 +27,17 @@ public class TRobotController {
     private NlpService nlpService;
 
     /**
+     * 模糊查询
+     * @param name
+     * @return
+     */
+    @GetMapping("/getRobotByLIke")
+    public Rs getRobotByLIke(@RequestParam String name){
+        List<TRobot> robotList = tRobotService.getRobotByLIke(name);
+        return Rs.buildData(robotList);
+    }
+
+    /**
      * 通过机器人id获取机器人信息
      * @param id
      * @return

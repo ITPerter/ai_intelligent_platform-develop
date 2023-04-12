@@ -7,6 +7,7 @@ import com.q.ai.mvc.dao.po.Robot;
 import com.q.ai.component.io.Page;
 import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
+import com.q.ai.mvc.dao.po.TRobot;
 import com.q.ai.mvc.service.NlpService;
 import com.q.ai.mvc.service.RobotService;
 import io.swagger.annotations.*;
@@ -28,6 +29,7 @@ public class RobotController {
     private RobotService robotService;
     @Autowired
     private NlpService nlpService;
+
 
     @ApiOperation(value = "获取机器人id", httpMethod = "GET")
     @ApiResponses(
