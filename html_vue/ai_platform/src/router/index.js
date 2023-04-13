@@ -5,10 +5,11 @@ import IndexView from '../views/IndexView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path:"/login",
-    component:()=>import("@/views/Login_")
-  },
+  // {
+  //   path:"/login",
+  //   name: 'login',
+  //   component:()=>import("@/views/login/index")
+  // },
   {
     path: '/',
     name: 'home',
@@ -33,7 +34,43 @@ const routes = [
       {
         path:'baseData',
         component:()=>import("@/views/BaseData/baseData")
-      }
+      },
+      {
+        path:'questioningSkills',
+        component:()=>import("@/views/skill/QuestioningSkills")
+      },
+      {
+        path:'taskSkills',
+        component:()=>import("@/views/skill/TaskSkills")
+      },
+      {
+        path:'skillDetails',
+        component:()=>import("@/views/skill/Details/skillDetails")
+      },
+      {
+        path:'intentionDetails',
+        component:()=>import("@/views/skill/Details/intentionDetails")
+      },
+      {
+        path:'sampleSet',
+        component:()=>import("@/views/skill/Details/sampleSet")
+      },
+      {
+        path:'skillCode',
+        component:()=>import("@/views/skill/QAskills/skillCode")
+      },
+      {
+        path:'domainDetails',
+        component:()=>import("@/views/skill/QAskills/domainDetails")
+      },
+      {
+        path:'tripApplication',
+        component:()=>import("@/views/skill/Details/tripApplication")
+      },{
+        path:'robotIntentDetails',
+        component:()=>import("@/views/Robot/robotIntentDetails")
+      },
+
     ]
   },
   

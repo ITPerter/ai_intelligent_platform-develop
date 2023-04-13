@@ -8,6 +8,7 @@
             <el-menu-item index="/robotList">机器人列表</el-menu-item>
             <el-menu-item index="1-2">选项2</el-menu-item>
         </el-submenu>
+
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-thumb"></i>意图</template>
             <el-menu-item index="/intetionList">意图列表</el-menu-item>
@@ -22,6 +23,11 @@
           <template slot="title"><i class="el-icon-setting"></i>任务技能列表</template>
             <el-menu-item index="3-1">任务型技能详情</el-menu-item>
             <el-menu-item index="3-2">选项2</el-menu-item>
+        </el-submenu>
+        <el-submenu index="5">
+          <template slot="title"><i class="el-icon-setting"></i>技能</template>
+          <el-menu-item index="/taskSkills">任务技能列表</el-menu-item>
+          <el-menu-item index="/questioningSkills">问答技能列表</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>

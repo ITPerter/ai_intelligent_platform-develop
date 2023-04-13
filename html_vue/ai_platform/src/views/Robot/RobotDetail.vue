@@ -1,4 +1,9 @@
+
+
 <template>
+  <div>
+
+
   <el-card>
       <div class="btns-status">
           <el-card>
@@ -23,7 +28,7 @@
               <div class="manage-header">
                   <div>意图管理</div>
                   <div>
-                      <el-button type="text">添加意图</el-button>
+                      <el-button type="text" @click="create1">添加意图</el-button>
                   </div>
               </div>
               <div class="manage-table">
@@ -36,6 +41,9 @@
                     prop="name"
                     label="名称"
                     width="180">
+                      <template slot-scope="scope">
+                        <router-link :to="`/robotIntentDetails/`">{{scope.row.name}}</router-link>
+                      </template>
                     </el-table-column>
                     <el-table-column
                     prop="code"
@@ -56,7 +64,7 @@
                     label="操作"
                     width="90">
                         <template>
-                            <el-button type="text" size="small">删除</el-button>
+                            <el-button type="text" size="small" @click="remove">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -67,7 +75,44 @@
               </div>
           </el-card>
       </div>
+
+<!--    嵌套表格-->
+    <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+      <el-table
+          ref="multipleTable"
+          :data="gridData"
+          height="250"
+          border
+          tooltip-effect="dark"
+          style="width: 100%"
+          @selection-change="handleSelectionChange">
+        <el-table-column
+            type="selection"
+            width="55">
+        </el-table-column>
+        <el-table-column
+            prop="name"
+            label="意图名称"
+            width="120">
+        </el-table-column>
+        <el-table-column
+            prop="no"
+            label="意图编码"
+            show-overflow-tooltip>
+        </el-table-column>
+      </el-table>
+      <div style="margin-top: 20px">
+        <el-button @click="toggleSelection()">取消选择</el-button>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogTableVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </el-card>
+  </div>
+
 </template>
 
 <script>
@@ -124,9 +169,76 @@ export default {
             code:"SHANGNAIEN",
             createTime: '2023-01-08',
             description:"Testing"
-            }]
+            }],
+          gridData: [{
+            name: '转人工',
+            no: '17788234111'
+          }, {
+            name: '查水位',
+            no: '17788234111'
+          }, {
+            name: '出差申请',
+            no: '17788234111'
+          },{
+            name: '语言接电话',
+            no: '17788234111'
+          }, {
+            name: '回家申请',
+            no: '17788234111'
+          }],
+          dialogTableVisible: false,
+          dialogFormVisible: false,
+          dialogFormVisible1: false,
+          form: {
+            name: '',
+            encoding: '',
+            date1: '',
+            date2: '',
+            delivery: false,
+            type: [],
+            resource: '',
+            desc: ''
+          },
+          formLabelWidth: '120px',
         }
-    }
+    },
+  methods: {
+    create() {
+      this.dialogFormVisible = true
+    },
+    create1() {
+      this.dialogTableVisible = true
+    },
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach(row => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    remove() {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+  }
 }
 </script>
 

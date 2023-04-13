@@ -1,3 +1,6 @@
+
+<!--意图管理页-->
+
 <template>
   <div id="intentionDetail-container">
     <div class="word-slot-manage">
@@ -14,6 +17,7 @@
                     style="width: 100%">
                     <el-table-column
                     prop="name"
+                    to=""
                     label="名称"
                     width="180">
                     </el-table-column>
