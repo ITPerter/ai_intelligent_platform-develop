@@ -16,10 +16,7 @@ import com.q.ai.mvc.dao.po.BaseData;
 import com.q.ai.mvc.dao.po.BaseDataValue;
 import com.q.ai.component.io.ParamJSON;
 import com.q.ai.component.io.Rs;
-import com.q.ai.mvc.service.BaseDataService;
-import com.q.ai.mvc.service.RobotService;
-import com.q.ai.mvc.service.WordSlotService;
-import com.q.ai.mvc.service.BaseDataValueService;
+import com.q.ai.mvc.service.*;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +36,8 @@ import java.util.List;
 public class ThirdController {
 
     @Autowired
+    private TRobotService tRobotService;
+    @Autowired
     private RobotService robotService;
     @Autowired
     private WordSlotService wordSlotService;
@@ -51,6 +50,20 @@ public class ThirdController {
 
     @Value("{sync_base_data_secret:8c10c8bb76f948b388dbe797d3cbefbb}")
     private String baseDataSecret;
+
+    @ApiImplicitParam(name = "param", value = "{\"robotId\":13,\"chatMsg\":\"新优流\"}", required = true, paramType = "body", dataType = "json", example = "{\"robotId\":14,\"chatMsg\":\"新优流\"}")
+    @RequestMapping(value = "/chatTest", produces = "application/json;charset=UTF-8")
+    @ApiResponses(@ApiResponse(code = 200, message = ""))
+    @ResponseBody
+    public Rs chatTest(@RequestBody ParamJSON param) {
+        int robotId = param.getMustInteger("robotId");
+        String chatMsg = param.getMustString("chatMsg");
+        if (StringUtils.isEmpty(chatMsg)) {
+            throw new RsException("说点啥吧？");
+        }
+        Object object = tRobotService.chat(robotId, chatMsg);
+        return Rs.buildData(object);
+    }
 
     /**
      * chat接口

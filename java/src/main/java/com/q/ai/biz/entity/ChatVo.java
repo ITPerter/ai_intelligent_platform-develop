@@ -1,7 +1,6 @@
 package com.q.ai.biz.entity;
 
 import com.q.ai.component.enuz.CHAT_STATE;
-import com.q.ai.mvc.dao.po.Intent;
 
 public class ChatVo {
     private CHAT_STATE state;
@@ -40,5 +39,26 @@ public class ChatVo {
 
     public void setCurrentSlot(ChatSlot currentSlot) {
         this.currentSlot = currentSlot;
+    }
+
+    private ChatIntention intention;
+    private ChatWordSlot currentWordSlot;
+
+    public ChatIntention getIntention() {
+        return intention;
+    }
+
+    public ChatVo setIntention(ChatIntention intention) {
+        this.intention = intention;
+        return this;
+    }
+
+    public ChatWordSlot getCurrentWordSlot() {
+        return currentWordSlot;
+    }
+
+    public ChatVo setCurrentWordSlot(ChatWordSlot currentWordSlot) {
+        this.currentWordSlot = currentWordSlot;
+        return this;
     }
 }

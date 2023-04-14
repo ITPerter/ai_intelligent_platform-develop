@@ -1,5 +1,7 @@
 package com.q.ai.mvc.dao.po;
 
+import com.q.ai.component.enuz.SLOT_TYPE;
+
 import java.time.LocalDateTime;
 
 public class WordSlot {
@@ -7,7 +9,7 @@ public class WordSlot {
     private String number;
     private String name;
     private Long intentionId;
-    private Long typeId;
+    private SLOT_TYPE type;
     private int isSpec;
     private Long  queryConfigID;
     private String voiceTemplet;
@@ -24,7 +26,7 @@ public class WordSlot {
                 ", number='" + number + '\'' +
                 ", name='" + name + '\'' +
                 ", intentionId=" + intentionId +
-                ", typeId=" + typeId +
+                ", type=" + type +
                 ", isSpec=" + isSpec +
                 ", queryConfigID=" + queryConfigID +
                 ", voiceTemplet='" + voiceTemplet + '\'' +
@@ -72,12 +74,12 @@ public class WordSlot {
         return this;
     }
 
-    public Long getTypeId() {
-        return typeId;
+    public SLOT_TYPE getType() {
+        return type;
     }
 
-    public WordSlot setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public WordSlot setType(SLOT_TYPE type) {
+        this.type = type;
         return this;
     }
 

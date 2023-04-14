@@ -47,4 +47,8 @@
         SELECT COUNT(*) FROM t_skill ts LEFT JOIN t_skillintention tsl ON ts.FID=tsl.FSkillID WHERE ts.FID=#{id}
     </select>
 
+    <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.Intention">
+        select * from t_intention where FNumber=#{number}
+    </select>
+
 </mapper>

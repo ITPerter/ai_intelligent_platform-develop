@@ -28,4 +28,8 @@ public class IntentionService {
     public int getCountByTaskId(int id) {
         return intentionDao.getCountByTaskId(id);
     }
+
+    public Intention getByNumber(String number){
+        return intentionDao.getByNumber(number);
+    }
 }

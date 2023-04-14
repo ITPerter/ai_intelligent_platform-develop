@@ -128,4 +128,59 @@ public class Session {
                 ", createTime=" + createTime +
                 '}';
     }
+
+//    -------------------------------------------------------------------------------------------------------------
+
+    private ChatIntention currentChatIntention;
+    private ChatIntention beforeChatIntention;
+
+    public ChatIntention getCurrentChatIntention() {
+        return currentChatIntention;
+    }
+
+    public Session setCurrentChatIntention(ChatIntention currentChatIntention) {
+        this.currentChatIntention = currentChatIntention;
+        return this;
+    }
+
+    public ChatIntention getBeforeChatIntention() {
+        return beforeChatIntention;
+    }
+
+    public Session setBeforeChatIntention(ChatIntention beforeChatIntention) {
+        this.beforeChatIntention = beforeChatIntention;
+        return this;
+    }
+
+    public String getCurrentIntentionNumber(){
+        if(null == currentChatIntention){
+            return null;
+        }
+        return currentChatIntention.getNumber();
+    }
+    public String getBeforeIntentionNumber(){
+        if(null == beforeChatIntention){
+            return null;
+        }
+        return beforeChatIntention.getNumber();
+    }
+
+    public ChatWordSlot getChatWordSlot2Fill(){
+        if(null != currentChatIntention)
+            for (ChatWordSlot chatSlot:currentChatIntention.getChatSlotList()){
+                int isMust = chatSlot.getIsMust();
+
+                boolean isMust1;
+                if (isMust <= 0){
+                    isMust1 = false;
+                 }else {
+                    isMust1 = true;
+                }
+
+                if (isMust1 && !SLOT_STATE.VERIFY_SUCCESS.equals(chatSlot.getSlotState())) {
+                    return chatSlot;
+                }
+            }
+        return null;
+    }
 }

@@ -17,4 +17,6 @@ public interface SessionUtil {
 
     public Session buildIntentAndFillSlot(Session session, String intentNumber, Map<String, Object> slot2ValueMap, String userOriginString);
 
+    public Session buildIntentionAndFillWordSlot(Session session, String intentNumber, Map<String, Object> slot2ValueMap, String userOriginString);
+
 }

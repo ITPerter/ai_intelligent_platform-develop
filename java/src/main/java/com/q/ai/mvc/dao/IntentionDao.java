@@ -22,4 +22,6 @@ public interface IntentionDao {
      * @return
      */
     public int getCountByTaskId(@Param("id") int id);
+
+    Intention getByNumber(@Param("number") String number);
 }

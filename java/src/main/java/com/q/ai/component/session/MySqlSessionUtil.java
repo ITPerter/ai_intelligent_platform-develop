@@ -3,17 +3,14 @@ package com.q.ai.component.session;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.mysql.cj.util.StringUtils;
-import com.q.ai.biz.entity.ChatIntent;
-import com.q.ai.biz.entity.ChatSlot;
-import com.q.ai.biz.entity.Session;
+import com.q.ai.biz.entity.*;
 import com.q.ai.component.enuz.SLOT_STATE;
 import com.q.ai.component.io.Page;
 import com.q.ai.component.io.RsException;
 import com.q.ai.mvc.dao.SessionDao;
-import com.q.ai.mvc.dao.po.Intent;
-import com.q.ai.mvc.dao.po.SessionPO;
-import com.q.ai.mvc.dao.po.Slot;
+import com.q.ai.mvc.dao.po.*;
 import com.q.ai.mvc.service.IntentService;
+import com.q.ai.mvc.service.IntentionService;
 import com.q.ai.mvc.service.WordSlotService;
 import com.q.ai.mvc.service.BaseDataValueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,9 @@ public class MySqlSessionUtil implements SessionUtil {
     private SessionDao sessionDao;
     @Autowired
     IntentService intentService;
+
+    @Autowired
+    IntentionService intentionService;
     @Autowired
     WordSlotService wordSlotService;
     @Autowired
@@ -72,8 +72,6 @@ public class MySqlSessionUtil implements SessionUtil {
      */
     @Override
     public Session buildIntentAndFillSlot(Session session, String nlpIntentNumber, Map<String, Object> slot2ValueMap, String userOriginString) {
-
-
         //  非词槽澄清过程中可能会没意图：
         //  1.首次可能会无意图
         // 2.上轮意图执行完后新的对话可能会无意图
@@ -116,6 +114,7 @@ public class MySqlSessionUtil implements SessionUtil {
 
         return session;
     }
+
 
     /**
      * 1.全新,第一次填入（当前意图为空&&上次的意图为空）
@@ -178,5 +177,109 @@ public class MySqlSessionUtil implements SessionUtil {
         session.setCurrentChatIntent(currentChatIntent);
         return session;
     }
+
+    /*-----------------------------------------------------------------------------------------------------------------*/
+    @Override
+    public Session buildIntentionAndFillWordSlot(Session session, String nlpIntentNumber, Map<String, Object> slot2ValueMap, String userOriginString) {
+        //  非词槽澄清过程中可能会没意图：
+        //  1.首次可能会无意图
+        // 2.上轮意图执行完后新的对话可能会无意图
+        ChatIntention chatIntention = session.getCurrentChatIntention();
+        if (null == nlpIntentNumber) {
+            if (null != chatIntention) {//2.上轮意图执行完后新的对话可能会无意图
+                session.setBeforeChatIntention(chatIntention);
+                session.setCurrentChatIntent(null);
+            }
+            return session;
+        }
+
+        Intention nlpIntent = intentionService.getByNumber(nlpIntentNumber);
+        if (null == nlpIntent) {
+            throw new RsException("NLP识别的意图已经不存在，可能需要重新训练");
+        }
+
+        ChatIntention beforeChatIntent = session.getBeforeChatIntention();
+        if (null == chatIntention) {
+            if (null == beforeChatIntent) { //1.全新,第一次填入（当前意图为空&&上次的意图为空）
+                return newCurrentIntention(session, nlpIntent, slot2ValueMap);
+            } else {
+                if (beforeChatIntent.getNumber().equals(nlpIntentNumber)) {//2.nlp提取到了上轮意图，恢复上轮意图
+                    session.setCurrentChatIntention(session.getBeforeChatIntention());
+                    session.setBeforeChatIntent(null);
+                    nlpSlotFillIntoCurrentIntent(session, slot2ValueMap, userOriginString);
+                } else {// 3.不是恢复意图，全新填充currentIntent
+                    return newCurrentIntention(session, nlpIntent, slot2ValueMap);
+                }
+            }
+        } else {
+            if (chatIntention.getNumber().equals(nlpIntentNumber)) {//4.当前意图与nlp意图一致，则合并填充词槽
+                nlpSlotFillIntoCurrentIntent(session, slot2ValueMap, userOriginString);
+            } else {//5.当前意图与nlp不一致，则当前意图保存为上轮意图，仍全新填充currentIntent
+                session.setBeforeChatIntention(chatIntention);
+                return newCurrentIntention(session, nlpIntent, slot2ValueMap);
+            }
+        }
+
+        return session;
+    }
+
+    /**
+     * 全新,第一次填入（当前意图为空&&上次的意图为空）(新的方法)
+     * @param session
+     * @param nlpIntent
+     * @param slot2ValueMap
+     * @return
+     */
+    private Session newCurrentIntention(Session session, Intention nlpIntent, Map<String, Object> slot2ValueMap) {
+        ChatIntention chatIntention = new ChatIntention(nlpIntent);
+
+        List<WordSlot> slotList = wordSlotService.getWordSlotByIntentionId(nlpIntent.getId());
+
+        List<ChatWordSlot> chatSlotList = new ArrayList<>();
+
+        for (WordSlot sLot : slotList) {
+            ChatWordSlot chatSlot = new ChatWordSlot(sLot);
+            String slotNumber = sLot.getNumber();
+            String originValue = slot2ValueMap.containsKey(slotNumber) ? String.valueOf(slot2ValueMap.get(slotNumber)) : null;
+            if (StringUtils.isNullOrEmpty(originValue)) {
+                chatSlot.setSlotState(SLOT_STATE.UN_FILL);
+            } else {
+                chatSlot.setOriginString(originValue);
+                chatSlot.setSlotState(SLOT_STATE.UN_VERIFY);
+            }
+            chatSlotList.add(chatSlot);
+        }
+
+        chatIntention.setChatSlotList(chatSlotList);
+        session.setCurrentChatIntention(chatIntention);
+        return session;
+    }
+
+    private Session nlpWordSlotFillIntoCurrentIntention(Session session, Map<String, Object> slot2ValueMap, String userOriginString) {
+        assert session.getBeforeChatIntention() != null;
+        ChatIntention chatIntention = session.getCurrentChatIntention();
+        List<ChatWordSlot> chatSlotList = new ArrayList<>();
+        for (ChatWordSlot chatSlot : chatIntention.getChatSlotList()) {
+            String slotNumber = chatSlot.getNumber();
+            String originValue = slot2ValueMap.containsKey(slotNumber) ? String.valueOf(slot2ValueMap.get(slotNumber)) : null;
+            if (!StringUtils.isNullOrEmpty(originValue)) {
+                //!(词槽之前校验通过，新给的没校验通过[这种不覆盖])
+                boolean need2Replace = !(SLOT_STATE.VERIFY_SUCCESS.equals(chatSlot.getSlotState()) &&
+                        baseDataValueService.isVerifySlot(Integer.valueOf(String.valueOf(chatSlot.getId())), chatSlot.getType(), originValue));
+                if (need2Replace) {
+                    chatSlot.setOriginString(originValue);
+                    if (SLOT_STATE.VERIFY_CHOOSE.equals(chatSlot.getSlotState())) {
+                        chatSlot.setOriginString(userOriginString);
+                    }
+                    chatSlot.setSlotState(SLOT_STATE.UN_VERIFY);
+                }
+            }
+            chatSlotList.add(chatSlot);
+        }
+        chatIntention.setChatSlotList(chatSlotList);
+        session.setCurrentChatIntention(chatIntention);
+        return session;
+    }
+
 
 }

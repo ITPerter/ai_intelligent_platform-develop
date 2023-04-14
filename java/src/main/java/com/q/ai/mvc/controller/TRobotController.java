@@ -66,7 +66,7 @@ public class TRobotController {
         page.setSize(size);
         int number1 = 0;
         if (number > 1){
-            number1 = (number-1)*size;
+            number1 = (number-1) * size;
         }
         List<TRobot> robotList = tRobotService.getRobotList(number1, size);
         int total = tRobotService.getRobotCount();

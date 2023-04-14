@@ -94,11 +94,15 @@ public class TSkillController {
      */
     @GetMapping("/getQuestionAnsweringSkills")
     public Rs getQuestionAnsweringSkills(@RequestParam int number, @RequestParam int size) {
-        List<TSkill> QuestionAnsweringSkills = tSkillService.getQuestionAnsweringSkills(number, size);
-        int count = tSkillService.getQuestionAnsweringCount();
         Page page = new Page();
         page.setNumber(number);
         page.setSize(size);
+        int number1 = 0;
+        if (number > 1){
+            number1 = (number-1) * size;
+        }
+        List<TSkill> QuestionAnsweringSkills = tSkillService.getQuestionAnsweringSkills(number1, size);
+        int count = tSkillService.getQuestionAnsweringCount();
         page.setTotal(count);
         return Rs.buildList(QuestionAnsweringSkills,page);
     }
@@ -152,6 +156,7 @@ public class TSkillController {
     public Rs getTaskByNumber(@RequestParam String number) {
         Long id = tSkillService.getSkillId(number);
         List<Intention> intentions = skillIntentionSlotService.getIntentions(id);
+        System.out.println("1----------------------->"+intentions);
         for (Intention intention: intentions) {
             List<WordSlot> wordSlots = wordSlotService.getWordSlotByIntentionId(intention.getId());
             List<String> slots = new ArrayList<>();
@@ -160,6 +165,7 @@ public class TSkillController {
             }
             intention.setSlotList(slots);
         }
+        System.out.println("2----------------------->"+intentions);
         return Rs.buildData(intentions);
     }
 

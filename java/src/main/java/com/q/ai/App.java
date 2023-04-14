@@ -53,13 +53,4 @@ public class App {
         //字符类型字段如果为null,输出为 "",而非null
         //JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.WriteNullStringAsEmpty.getMask();
     }
-
-
-
-
-
-
-
-
-
 }

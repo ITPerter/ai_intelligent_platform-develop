@@ -84,6 +84,7 @@ public class RobotService {
             throw new RsException("机器人不存在。");
         }
         Session session = requestContext.getSession();
+        System.out.println("--------------------------------->" + session);
 
         String currentIntentNumber = session.getCurrentIntentNumber();
         ChatSlot chatSlot2Fill = session.getChatSlot2Fill();
