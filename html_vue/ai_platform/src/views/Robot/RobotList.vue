@@ -8,7 +8,7 @@
       <div style="width: 400px"><el-row class="button1">
         <el-button type="primary" @click="create">新增</el-button>
         <el-button type="danger" @click="remove">删除</el-button>
-        <el-button type="success">刷新</el-button>
+        <el-button type="success" @click="getRobotList">刷新</el-button>
         <el-button type="warning">退出</el-button>
 
       </el-row>
@@ -95,9 +95,14 @@
 </template>
 
 <script>
+import { getRobotList } from '@/api/test'
 export default {
     data(){
         return {
+          page: {
+            number: 1,
+            size: 5
+          },
              tableData: [{
                 robotName: '2016-05-03',
                 createTime: '王小虎',
@@ -157,6 +162,13 @@ export default {
     },
 
   methods :{
+      getRobotList() {
+        getRobotList(this.page).then(response => {
+          console.log("-------------------------")
+          console.log(response.data);
+          console.log("--------------------------")
+        })
+      },
     create() {
       this.dialogFormVisible = true
     },

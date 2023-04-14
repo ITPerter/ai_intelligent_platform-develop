@@ -32,6 +32,7 @@ public class TRobotController {
      * @return
      */
     @GetMapping("/getRobotByLIke")
+    @ResponseBody
     public Rs getRobotByLIke(@RequestParam String name){
         List<TRobot> robotList = tRobotService.getRobotByLIke(name);
         return Rs.buildData(robotList);
@@ -58,6 +59,7 @@ public class TRobotController {
      * @return
      */
     @GetMapping("/getRobotList")
+    @ResponseBody
     public Rs getRobotList(@RequestParam int number,@RequestParam int size) {
         List<TRobot> robotList = tRobotService.getRobotList(number, size);
         int total = tRobotService.getRobotCount();

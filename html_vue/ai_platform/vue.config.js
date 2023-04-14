@@ -30,7 +30,7 @@ module.exports = {
   devServer: {
     open: true,//vue项目启动时自动打开浏览器
     host: 'localhost',//本机
-    port: 8022,//端口号
+    port: 3000,//端口号
     https: false,
     //以上的ip和端口是我们本机的;下面为需要跨域的
     proxy: {  //配置跨域
@@ -39,7 +39,7 @@ module.exports = {
         ws: true,
         changOrigin: true,  //允许跨域
         pathRewrite: {
-          '^/api': ''  //请求的时候使用这个api就可以
+          ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
     }

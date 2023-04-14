@@ -44,6 +44,13 @@ export function updateTaskById(ud) {
     })
 }
 
+export function getRobotList(page){
+    return request({
+        url: `/tRobot/getRobotList?number=${page.number}&size=${page.size}`,
+        method: 'get'
+    })
+}
+
 
 
 // const options = {
