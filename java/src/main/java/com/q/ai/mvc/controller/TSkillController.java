@@ -182,12 +182,17 @@ public class TSkillController {
      */
     @GetMapping("/getTaskList")
     public Rs getTaskList(@RequestParam int number, @RequestParam int size) {
-        List<TSkill> taskList = tSkillService.getTaskList(number, size);
         int count = tSkillService.getTaskCount();
         Page page = new Page();
         page.setNumber(number);
         page.setSize(size);
         page.setTotal(count);
+        int number1 = 0;
+        if (number > 1){
+            number1 = ( number - 1 ) * size;
+        }
+        List<TSkill> taskList = tSkillService.getTaskList(number1, size);
+
         return Rs.buildList(taskList,page);
     }
 

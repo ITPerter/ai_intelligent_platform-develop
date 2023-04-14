@@ -61,12 +61,17 @@ public class TRobotController {
     @GetMapping("/getRobotList")
     @ResponseBody
     public Rs getRobotList(@RequestParam int number,@RequestParam int size) {
-        List<TRobot> robotList = tRobotService.getRobotList(number, size);
-        int total = tRobotService.getRobotCount();
         Page page = new Page();
-        page.setTotal(total);
         page.setNumber(number);
         page.setSize(size);
+        int number1 = 0;
+        if (number > 1){
+            number1 = (number-1)*size;
+        }
+        List<TRobot> robotList = tRobotService.getRobotList(number1, size);
+        int total = tRobotService.getRobotCount();
+        page.setTotal(total);
+        System.out.println(page);
         return Rs.buildList(robotList, page);
     }
 

@@ -20,6 +20,15 @@ export function getInfo(list) {
     })
 }
 
+export function deleteRobotById(idList) {
+    return request({
+        url: '/tSkill/getTaskList',
+        method: 'delete',
+        // params,
+        data: idList
+    })
+}
+
 export function insertTaskSkill(insert) {
     return request({
         url: '/tSkill/insertTaskSkill',

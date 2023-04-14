@@ -37,22 +37,41 @@
   <div id="robotList-container">
     <el-card>
         <el-table :data="tableData" height="650" border style="width: 100%">
-            <el-table-column prop="robotName" label="名称" width="180">
+            <el-table-column prop="name" label="名称" width="180">
                 <template slot-scope="scope">
-                    <router-link :to="`/robotDetail/${scope.row.index}`">{{scope.row.robotName}}</router-link>
+                    <router-link :to="`/robotDetail/${scope.row.index}`">{{scope.row.name}}</router-link>
                 </template>
             </el-table-column>
             <el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
-            <el-table-column prop="desc" label="描述"></el-table-column>
-            <el-table-column prop="creator" label="创建人"></el-table-column>
-            <el-table-column prop="status" label="训练状态"></el-table-column>
+            <el-table-column prop="description" label="描述"></el-table-column>
+            <el-table-column label="创建人">
+              <template slot-scope="scope">
+                {{map.boolean[scope.row.creatorId]}}
+              </template>
+            </el-table-column>
+            <el-table-column label="训练状态">
+              <template slot-scope="scope">
+                {{status.boolean[scope.row.train]}}
+              </template>
+            </el-table-column>
             <el-table-column prop="operation" label="操作">
                 <template>
                   <el-button type="text" size="small" @click="edit">编辑</el-button>
-                    <el-button @click="remove1" type="text" size="small" >删除</el-button>
+                  <el-button @click="remove1" type="text" size="small" >删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
+      <div class="block">
+        <span class="demonstration">显示总数</span>
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="page.number"
+            :page-size="page.size"
+            layout="total, prev, pager, next"
+            :total="page.total">
+        </el-pagination>
+      </div>
     </el-card>
   </div>
 
@@ -97,55 +116,18 @@
 <script>
 import { getRobotList } from '@/api/test'
 export default {
+
     data(){
         return {
           page: {
             number: 1,
-            size: 5
+            size: 5,
+            total: 0
           },
-             tableData: [{
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }, {
-                robotName: '2016-05-03',
-                createTime: '王小虎',
-                desc: '上海市普陀区金沙江路 1518 弄',
-                creator:'商乃恩',
-                status:"已训练",
-                }],
+          map: {boolean: {0: '地灵', 1: '苍穹', 2: '天空', 100000: '启强'}},
+          //0未训练，1训练中，2训练成功，3训练失败
+          status: {boolean: {0: '未训练',1: '训练中', 2: '训练成功', 3: '训练失败'}},
+          tableData: [],
           dialogFormVisible: false,
           dialogFormVisible1: false,
           form: {
@@ -160,17 +142,38 @@ export default {
           },
         }
     },
-
+  created() {
+    getRobotList(this.page).then(response => {
+      console.log("-------------------------")
+      console.log(response.data);
+      this.page.total = response.data.data.page.total
+      this.page.number = response.data.data.page.number
+      this.page.size = response.data.data.page.size
+      this.tableData = response.data.data.list;
+      console.log("--------------------------")
+    })
+  },
   methods :{
-      getRobotList() {
-        getRobotList(this.page).then(response => {
-          console.log("-------------------------")
-          console.log(response.data);
-          console.log("--------------------------")
-        })
-      },
+    handleSizeChange() {
+      console.log('handleSizeChange')
+    },
+    // 下一页
+    handleCurrentChange() {
+      console.log(this.page)
+      console.log("handleCurrentChange")
+      getRobotList(this.page).then(response => {
+        console.log("-------------------------")
+        console.log(response.data);
+        this.page.total = response.data.data.page.total
+        this.page.number = response.data.data.page.number
+        this.page.size = response.data.data.page.size
+        this.tableData = response.data.data.list;
+        console.log("--------------------------")
+      })
+    },
     create() {
       this.dialogFormVisible = true
+
     },
 
     remove() {
@@ -197,6 +200,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+
         this.$message({
           type: 'success',
           message: '删除成功!'
