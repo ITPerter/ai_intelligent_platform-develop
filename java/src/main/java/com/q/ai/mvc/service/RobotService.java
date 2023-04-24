@@ -85,12 +85,11 @@ public class RobotService {
         }
         Session session = requestContext.getSession();
         System.out.println("--------------------------------->" + session);
-
         String currentIntentNumber = session.getCurrentIntentNumber();
         ChatSlot chatSlot2Fill = session.getChatSlot2Fill();
         String chatSlotNumber = chatSlot2Fill == null ? null : chatSlot2Fill.getNumber();
         JSONObject dataJson = nlpService.getIntent(robotId, chatMsg, currentIntentNumber, chatSlotNumber);
-
+        System.out.println("--------------------------->" + dataJson);
         JSONArray intentJsonArray = dataJson.getJSONArray("intent");
         JSONObject slot2Value = dataJson.getJSONObject("entities");
 

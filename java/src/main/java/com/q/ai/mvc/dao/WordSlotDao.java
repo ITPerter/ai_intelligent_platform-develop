@@ -39,6 +39,8 @@ public interface WordSlotDao {
      */
     List<WordSlot> getWordSlotByIntentionId(@Param("id") Long id);
 
+    List<WordSlot> getWordSlotByIntentionId2(@Param("id") Long id);
+
     /**
      * 我把意图id集获取词槽列表
      * @param intentionIds

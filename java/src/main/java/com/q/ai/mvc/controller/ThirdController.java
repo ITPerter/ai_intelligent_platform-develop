@@ -52,10 +52,11 @@ public class ThirdController {
     private String baseDataSecret;
 
     @ApiImplicitParam(name = "param", value = "{\"robotId\":13,\"chatMsg\":\"新优流\"}", required = true, paramType = "body", dataType = "json", example = "{\"robotId\":14,\"chatMsg\":\"新优流\"}")
-    @RequestMapping(value = "/chatTest", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/chat", produces = "application/json;charset=UTF-8")
     @ApiResponses(@ApiResponse(code = 200, message = ""))
     @ResponseBody
     public Rs chatTest(@RequestBody ParamJSON param) {
+        System.out.println("param参数： " + param);
         int robotId = param.getMustInteger("robotId");
         String chatMsg = param.getMustString("chatMsg");
         if (StringUtils.isEmpty(chatMsg)) {
@@ -65,16 +66,35 @@ public class ThirdController {
         return Rs.buildData(object);
     }
 
+    @ApiImplicitParam(name = "param", value = "{\"robotId\":13,\"chatMsg\":\"新优流\"}", required = true, paramType = "body", dataType = "json", example = "{\"robotId\":14,\"chatMsg\":\"新优流\"}")
+    @RequestMapping(value = "/chat_v2", produces = "application/json;charset=UTF-8")
+    @ApiResponses(@ApiResponse(code = 200, message = ""))
+    @ResponseBody
+//    @Auth(AUTH_TYPE.USER_TOKEN)
+    public Rs chat_v2(@RequestBody ParamJSON param) {
+        System.out.println(param);
+        int robotId = param.getMustInteger("robotId");
+        String chatMsg = param.getMustString("chatMsg");
+        String userId = param.getMustString("userId");
+        String token = param.getMustString("token");
+        JSONObject data = param.getJsonObject("data");
+        if (StringUtils.isEmpty(chatMsg)) {
+            throw new RsException("说点啥吧？");
+        }
+
+        Object object = tRobotService.chat2(robotId, chatMsg,userId,token,data);
+        return Rs.buildData(object);
+    }
+
     /**
      * chat接口
-     *
      * @param param
      * @return
      */
     //@ApiOperation(value = "对话接口", notes = "对话接口", httpMethod = "POST",response = Rs.class)
     //example暂时没有被knife4j支持,使用value临时替用
     @ApiImplicitParam(name = "param", value = "{\"robotId\":13,\"chatMsg\":\"新优流\"}", required = true, paramType = "body", dataType = "json", example = "{\"robotId\":14,\"chatMsg\":\"新优流\"}")
-    @RequestMapping(value = "/chat", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/chatOld", produces = "application/json;charset=UTF-8")
     @ApiResponses(@ApiResponse(code = 200, message = ""))
     @ResponseBody
 //    @Auth(AUTH_TYPE.USER_TOKEN)
@@ -88,6 +108,7 @@ public class ThirdController {
         return Rs.buildData(object);
     }
 
+
     /**
      * chat接口2
      *
@@ -97,11 +118,11 @@ public class ThirdController {
     //@ApiOperation(value = "对话接口", notes = "对话接口", httpMethod = "POST",response = Rs.class)
     //example暂时没有被knife4j支持,使用value临时替用
     @ApiImplicitParam(name = "param", value = "{\"robotId\":13,\"chatMsg\":\"新优流\"}", required = true, paramType = "body", dataType = "json", example = "{\"robotId\":14,\"chatMsg\":\"新优流\"}")
-    @RequestMapping(value = "/chat_v2", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/chat_v2_Old", produces = "application/json;charset=UTF-8")
     @ApiResponses(@ApiResponse(code = 200, message = ""))
     @ResponseBody
 //    @Auth(AUTH_TYPE.USER_TOKEN)
-    public Rs chat_v2(@RequestBody ParamJSON param) {
+    public Rs chat_v2_Old(@RequestBody ParamJSON param) {
         int robotId = param.getMustInteger("robotId");
         String chatMsg = param.getMustString("chatMsg");
         String userId = param.getMustString("userId");
@@ -157,7 +178,6 @@ public class ThirdController {
 
         }
         throw new RsException("暂不支持的操作");
-
 
     }
 

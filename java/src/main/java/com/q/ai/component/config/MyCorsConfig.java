@@ -14,6 +14,7 @@ public class MyCorsConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 //        允许谁访问
         corsConfiguration.addAllowedOrigin("http://localhost:3000");
+        corsConfiguration.addAllowedOrigin("http://localhost:9080");
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");

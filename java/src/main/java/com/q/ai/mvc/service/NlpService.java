@@ -29,7 +29,6 @@ public class NlpService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     /**
      * @param robotId
      * @return

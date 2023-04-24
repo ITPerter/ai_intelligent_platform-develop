@@ -41,6 +41,7 @@ public class ChatVo {
         this.currentSlot = currentSlot;
     }
 
+
     private ChatIntention intention;
     private ChatWordSlot currentWordSlot;
 

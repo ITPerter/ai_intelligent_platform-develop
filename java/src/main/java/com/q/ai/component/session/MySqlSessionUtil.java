@@ -192,8 +192,9 @@ public class MySqlSessionUtil implements SessionUtil {
             }
             return session;
         }
-
+        System.out.println("nlp意图------------>" + nlpIntentNumber);
         Intention nlpIntent = intentionService.getByNumber(nlpIntentNumber);
+        System.out.println("nlp结果------------》" + nlpIntent);
         if (null == nlpIntent) {
             throw new RsException("NLP识别的意图已经不存在，可能需要重新训练");
         }
@@ -206,14 +207,14 @@ public class MySqlSessionUtil implements SessionUtil {
                 if (beforeChatIntent.getNumber().equals(nlpIntentNumber)) {//2.nlp提取到了上轮意图，恢复上轮意图
                     session.setCurrentChatIntention(session.getBeforeChatIntention());
                     session.setBeforeChatIntent(null);
-                    nlpSlotFillIntoCurrentIntent(session, slot2ValueMap, userOriginString);
+                    nlpWordSlotFillIntoCurrentIntention(session, slot2ValueMap, userOriginString);
                 } else {// 3.不是恢复意图，全新填充currentIntent
                     return newCurrentIntention(session, nlpIntent, slot2ValueMap);
                 }
             }
         } else {
             if (chatIntention.getNumber().equals(nlpIntentNumber)) {//4.当前意图与nlp意图一致，则合并填充词槽
-                nlpSlotFillIntoCurrentIntent(session, slot2ValueMap, userOriginString);
+                nlpWordSlotFillIntoCurrentIntention(session, slot2ValueMap, userOriginString);
             } else {//5.当前意图与nlp不一致，则当前意图保存为上轮意图，仍全新填充currentIntent
                 session.setBeforeChatIntention(chatIntention);
                 return newCurrentIntention(session, nlpIntent, slot2ValueMap);
@@ -233,7 +234,7 @@ public class MySqlSessionUtil implements SessionUtil {
     private Session newCurrentIntention(Session session, Intention nlpIntent, Map<String, Object> slot2ValueMap) {
         ChatIntention chatIntention = new ChatIntention(nlpIntent);
 
-        List<WordSlot> slotList = wordSlotService.getWordSlotByIntentionId(nlpIntent.getId());
+        List<WordSlot> slotList = wordSlotService.getWordSlotByIntentionId2(nlpIntent.getId());
 
         List<ChatWordSlot> chatSlotList = new ArrayList<>();
 
@@ -265,7 +266,7 @@ public class MySqlSessionUtil implements SessionUtil {
             if (!StringUtils.isNullOrEmpty(originValue)) {
                 //!(词槽之前校验通过，新给的没校验通过[这种不覆盖])
                 boolean need2Replace = !(SLOT_STATE.VERIFY_SUCCESS.equals(chatSlot.getSlotState()) &&
-                        baseDataValueService.isVerifySlot(Integer.valueOf(String.valueOf(chatSlot.getId())), chatSlot.getType(), originValue));
+                        baseDataValueService.isVerifyWordSlot(Integer.valueOf(String.valueOf(chatSlot.getId())), chatSlot.getType(), originValue));
                 if (need2Replace) {
                     chatSlot.setOriginString(originValue);
                     if (SLOT_STATE.VERIFY_CHOOSE.equals(chatSlot.getSlotState())) {

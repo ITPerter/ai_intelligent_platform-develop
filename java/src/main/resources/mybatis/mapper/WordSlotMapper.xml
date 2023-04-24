@@ -6,7 +6,7 @@
         <result property="number" column="FNumber"/>
         <result property="name" column="FName"/>
         <result property="intentionId" column="FIntentionID"/>
-        <result property="typeId" column="FTypeId"/>
+        <result property="type" column="FType"/>
         <result property="isSpec" column="FIsSpec"/>
         <result property="queryConfigID" column="FQueryConfigID"/>
         <result property="voiceTemplet" column="FVoiceTemplet"/>
@@ -22,7 +22,7 @@
         <result property="number" column="FNumber"/>
         <result property="name" column="FName"/>
         <result property="intentionId" column="FIntentionID"/>
-        <result property="typeId" column="FTypeId"/>
+        <result property="type" column="FType"/>
         <result property="isSpec" column="FIsSpec"/>
         <result property="queryConfigID" column="FQueryConfigID"/>
         <result property="voiceTemplet" column="FVoiceTemplet"/>
@@ -91,8 +91,14 @@
             WHERE ti.FID=#{id};
     </select>
 
-    <select id="getById" resultType="com.q.ai.mvc.dao.po.WordSlot">
-        select * from t_wordslot where FID=#{id}
+    <select id="getWordSlotByIntentionId2" resultMap="wordSlot">
+        SELECT tw.* FROM t_intention ti
+            LEFT JOIN t_wordslot tw ON ti.FID=tw.FIntentionID
+            WHERE ti.FID=#{id};
+    </select>
+
+    <select id="getById" resultMap="wordSlot">
+        select * from slot where FID=#{id}
     </select>
 
     <select id="getByNumber" resultType="com.q.ai.mvc.dao.po.Slot">

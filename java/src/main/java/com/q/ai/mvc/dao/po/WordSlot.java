@@ -19,6 +19,17 @@ public class WordSlot {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 
+    private String baseDateNumber;
+
+    public String getBaseDateNumber() {
+        return baseDateNumber;
+    }
+
+    public WordSlot setBaseDateNumber(String baseDateNumber) {
+        this.baseDateNumber = baseDateNumber;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "WordSlot{" +

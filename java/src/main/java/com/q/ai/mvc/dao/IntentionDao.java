@@ -10,7 +10,6 @@ public interface IntentionDao {
     /**
      * 通过任务型技能id获取对应的意图列表
      * @param id
-     * @param offset
      * @param size
      * @return
      */
@@ -23,5 +22,5 @@ public interface IntentionDao {
      */
     public int getCountByTaskId(@Param("id") int id);
 
-    Intention getByNumber(@Param("number") String number);
+    Intention getByNumber(String number);
 }

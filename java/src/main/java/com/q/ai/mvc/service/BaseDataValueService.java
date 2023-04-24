@@ -7,6 +7,7 @@ import com.q.ai.component.util.NormalizationUtil;
 import com.q.ai.mvc.dao.po.BaseDataValue;
 import com.q.ai.component.io.Page;
 import com.q.ai.mvc.dao.po.Slot;
+import com.q.ai.mvc.dao.po.WordSlot;
 import com.q.ai.mvc.esDao.BaseDataValueDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,6 +102,34 @@ public class BaseDataValueService {
         switch (slotType) {
             case BASE_DATA:
                 String baseDataNumber = slot.getBaseDataNumber();
+                List<BaseDataValue> baseDataValueList = baseDataValueDao.searchByBaseDataNumber(baseDataNumber, origin, new Page(1, 5));
+
+                if (baseDataValueList == null || baseDataValueList.isEmpty()) {//没有校验通过
+                    return false;
+                }
+
+            case TIME:
+                LocalDateTime time = NormalizationUtil.getNormalizationTime(origin);
+                if (null == time) {
+                    return false;
+                }
+            case TEXT:
+                break;
+            default:
+        }
+        return true;
+    }
+
+
+    public boolean isVerifyWordSlot(int slotId, SLOT_TYPE slotType, String origin) {
+        WordSlot slot = wordSlotService.getWordSlotById(Long.valueOf(String.valueOf(slotId)));
+        if (null == slot) {
+            throw new RsException("词槽不存在");
+        }
+
+        switch (slotType) {
+            case BASE_DATA:
+                String baseDataNumber = slot.getBaseDateNumber();
                 List<BaseDataValue> baseDataValueList = baseDataValueDao.searchByBaseDataNumber(baseDataNumber, origin, new Page(1, 5));
 
                 if (baseDataValueList == null || baseDataValueList.isEmpty()) {//没有校验通过

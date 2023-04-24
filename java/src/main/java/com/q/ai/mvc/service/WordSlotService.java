@@ -41,6 +41,10 @@ public class WordSlotService {
         return wordSlotDao.getWordSlotByIntentionId(id);
     }
 
+    public List<WordSlot> getWordSlotByIntentionId2(Long id) {
+        return wordSlotDao.getWordSlotByIntentionId2(id);
+    }
+
     /**
      * 通过id查询词槽
      * @param id    词槽id
