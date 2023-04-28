@@ -62,6 +62,7 @@ public class UserController {
         Map<String, Object> user = new HashMap<>();
         user.put("userName", userName);
         user.put("userId", session.getUserId());
+        System.out.println("------------------------------------------------------------------------------------------");
         return Rs.buildData(user);
     }
 
@@ -70,7 +71,6 @@ public class UserController {
     public Rs logout() {
         userService.logout(requestContext.getSession());
         return Rs.buildOK("退出登录成功");
-
     }
 
 }

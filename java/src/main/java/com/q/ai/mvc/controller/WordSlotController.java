@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 词槽相关接口
  */
-@Auth(AUTH_TYPE.SESSION)
+//@Auth(AUTH_TYPE.SESSION)
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/slot")

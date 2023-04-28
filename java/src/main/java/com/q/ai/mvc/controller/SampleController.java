@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Auth(AUTH_TYPE.SESSION)
+//@Auth(AUTH_TYPE.SESSION)
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/sample")

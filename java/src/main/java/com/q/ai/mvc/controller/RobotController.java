@@ -19,7 +19,7 @@ import java.util.List;
 
 //@Api(tags="机器人接口")
 //@ApiResponses({@ApiResponse(code = 200,message="响应成功",response=Rs.class)})
-@Auth(AUTH_TYPE.SESSION)
+//@Auth(AUTH_TYPE.SESSION)
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/robot")

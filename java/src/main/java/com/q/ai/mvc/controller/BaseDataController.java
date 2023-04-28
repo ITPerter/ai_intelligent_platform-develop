@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Auth(AUTH_TYPE.SESSION)
+//@Auth(AUTH_TYPE.SESSION)
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/baseData")
