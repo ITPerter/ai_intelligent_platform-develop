@@ -40,14 +40,17 @@ public class IntentController {
      * @return
      */
     @PutMapping("/addIntention")
-    public Rs addIntention(@RequestBody ParamJSON param,@RequestParam("skillId") int skillId) {
+//    ,@RequestParam("skillId") int skillId
+    public Rs addIntention(@RequestBody ParamJSON param) {
+        Object skillId = param.get("skillId");
+        System.out.println(skillId);
         Intention intention = param.toJavaObject(Intention.class);
         System.out.println(skillId);
         Long id;
         int i;
         try {
             id = intentService.addIntention(intention);
-            i = skillIntentionSlotService.addSkillIntention(id, skillId);
+            i = skillIntentionSlotService.addSkillIntention(id, (int)skillId);
         }catch (Exception e){
             return Rs.buildErr(e);
         }

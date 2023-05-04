@@ -97,42 +97,31 @@ public class TRobotService {
             throw new RsException("机器人不存在。");
         }
         Session session = requestContext.getSession();
-        System.out.println("--------------------->" + session);
-
         String currentIntentionNumber = session.getCurrentIntentionNumber();
         ChatWordSlot chatSlot2Fill = session.getChatWordSlot2Fill();
         String chatSlotNumber = chatSlot2Fill == null ? null : chatSlot2Fill.getNumber();
         JSONObject dataJson = nlpService.getIntent(robotId, chatMsg, currentIntentionNumber, chatSlotNumber);
-
-        System.out.println("-------------->" + dataJson);
-
         JSONArray intentJsonArray = dataJson.getJSONArray("intent");
         JSONObject slot2Value = dataJson.getJSONObject("entities");
-
-        currentIntentionNumber = intentJsonArray == null ? null : intentJsonArray.size() == 0 ? null : intentJsonArray.getJSONObject(0).getString("name");
+        currentIntentionNumber = intentJsonArray == null ? null : intentJsonArray.size() == 0 ? null : intentJsonArray
+                .getJSONObject(0).getString("name");
         Map<String, Object> slot2ValueMap = slot2Value == null ? new HashMap<>() : slot2Value.getInnerMap();
 
         session = sessionUtil.buildIntentionAndFillWordSlot(session, currentIntentionNumber, slot2ValueMap, chatMsg);
-//        sessionUtil.save(session);
         //提取填充完成之后，校验，问询
         //为什么要重新获取，因为在nlp填槽过程中意图可能已经切换
-        System.out.println("session---------------->" + session);
         ChatIntention chatIntention = session.getCurrentChatIntention();
-        System.out.println("------------------------>" + chatIntention.toString());
         ChatVo chatVo = new ChatVo();
         chatVo.setIntention(chatIntention);
-        System.out.println("------------------->" + chatIntention);
         if (null == chatIntention) {
             chatVo.setState(CHAT_STATE.NO_INTENT);
             chatVo.setMsg("当前没有获得意图");
             return chatVo;
         }
-        System.out.println("----------------------------------------");
         List<ChatWordSlot> chatSlotList = chatIntention.getChatSlotList();
         for (ChatWordSlot c : chatSlotList) {
             System.out.println(c.toString());
         }
-        System.out.println("------------------------>>" + chatSlotList);
         if (null != chatSlotList && chatSlotList.size() != 0) {
             for (ChatWordSlot chatSlot : chatSlotList) {
                 SLOT_STATE slotState = SLOT_STATE.UN_FILL;
@@ -144,9 +133,7 @@ public class TRobotService {
                     Long slotId = chatSlot.getId();
                     SLOT_TYPE slotType = chatSlot.getType();
                     String origin = chatSlot.getOriginString();
-//                    int wordSlotId = Integer.valueOf(String.valueOf(slotId));
                     WordSlot slot = wordSlotService.getWordSlotById(slotId);
-                    System.out.println("----------------->slot" + slot);
                     if (null == slot) {
                         throw new RsException("词槽不存在");
                     }
@@ -240,7 +227,8 @@ public class TRobotService {
         System.out.println(dataJson);
         JSONObject slot2Value = dataJson.getJSONObject("entities");
 
-        intentionNumber = intentJsonArray == null ? null : intentJsonArray.size() == 0 ? null : intentJsonArray.getJSONObject(0).getString("name");
+        intentionNumber = intentJsonArray == null ? null : intentJsonArray.size() == 0 ? null : intentJsonArray.
+                getJSONObject(0).getString("name");
         Map<String, Object> slot2ValueMap = slot2Value == null ? new HashMap<>() : slot2Value.getInnerMap();
 
         session = sessionUtil.buildIntentionAndFillWordSlot(session, intentionNumber, slot2ValueMap, chatMsg);
@@ -338,7 +326,6 @@ public class TRobotService {
 
         chatVo.setState(CHAT_STATE.COMPLETE);
         chatVo.setMsg("当前意图已经完成");
-        //判断是不是查水位的意图
         if(chatVo.getIntention().getNumber().equals("water_level")){
             //构造查询条件map对象
             Map<String,String> map = new HashMap<>();

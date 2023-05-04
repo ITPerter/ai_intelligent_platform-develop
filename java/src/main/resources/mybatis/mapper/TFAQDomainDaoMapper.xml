@@ -44,6 +44,7 @@
     </select>
 
     <insert id="addFAQDomain" parameterType="com.q.ai.mvc.dao.po.TFAQDomain">
-
+        insert into t_faq_domain (FID,FName,FNumber,FCreateTime,FUserID,FDesc,FQAID)
+        values (#{FID}, #{FName}, #{FNumber}, #{FCreateTime}, #{FUserID}, #{FDesc},#{FQAID});
     </insert>
 </mapper>

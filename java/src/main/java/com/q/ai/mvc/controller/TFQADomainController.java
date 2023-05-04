@@ -28,11 +28,12 @@ public class TFQADomainController {
         return Rs.buildData(tfaqDomainList);
     }
 
-    @PutMapping("/")
+    @PutMapping("/addFAQDomain")
     public Rs addFAQDomain(@RequestBody ParamJSON paramJSON){
+        System.out.println(paramJSON);
         TFAQDomain tfaqDomain = paramJSON.toJavaObject(TFAQDomain.class);
         int i = tfaqDomianService.addFAQDomain(tfaqDomain);
-        return i <= 0 ? Rs.buildData(i,"添加成功") : Rs.buildData(1,"添加失败");
+        return i > 0 ? Rs.buildData(i,"添加成功") : Rs.buildData(1,"添加失败");
     }
 
     @GetMapping("/getDomainByNumber")

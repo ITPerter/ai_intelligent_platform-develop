@@ -13,6 +13,10 @@ public class IdGenerator {
         Random random = new Random();
         long min = (long) Math.pow(10, ID_LENGTH - 1);
         long max = (long) Math.pow(10, ID_LENGTH) - 1;
-        return random.nextLong() % (max - min) + min;
+        return Math.abs(random.nextLong() % (max - min) + min);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(generateId());
     }
 }
